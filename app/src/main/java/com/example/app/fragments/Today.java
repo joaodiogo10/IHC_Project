@@ -3,12 +3,20 @@ package com.example.app.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.app.R;
+import com.example.app.activities.MedicationTask;
+import com.example.app.activities.Task;
+import com.example.app.activities.TasksRecViewAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +33,8 @@ public class Today extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView tasksRecView;
 
     public Today() {
         // Required empty public constructor
@@ -62,6 +72,26 @@ public class Today extends Fragment {
                              Bundle savedInstanceState) {
         getActivity().setTitle(R.string.nav_today);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_today, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_today, container, false);
+
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        tasks.add(new MedicationTask("Medication","Take pills", "15/05/2021","10:30", "Ben-u-ron", 1));
+        tasks.add(new Task("Measurement","Measure blood pressure","15/05/2021", "15:20"));
+        tasks.add(new Task("Activity","Running","15/05/2021", "18:00"));
+
+        tasksRecView = view.findViewById(R.id.tasksTodayRecyclerView);
+       /* recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));*/
+
+        TasksRecViewAdapter adapter = new TasksRecViewAdapter(view.getContext());
+        adapter.setTasks(tasks);
+
+        tasksRecView.setAdapter(adapter);
+        tasksRecView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+
+        return view;
     }
 }

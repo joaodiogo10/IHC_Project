@@ -1,0 +1,37 @@
+package com.example.app.activities;
+
+public class MedicationTask extends Task {
+
+    private String pill;
+    private int dose;
+
+    public MedicationTask(String type, String name,String day, String hour, String pill, int dose) {
+        super(type, name, day, hour);
+        this.pill = pill;
+        this.dose = dose;
+    }
+
+    public String getPill() {
+        return pill;
+    }
+
+    public void setPill(String pill) {
+        this.pill = pill;
+    }
+
+    public int getDose() {
+        return dose;
+    }
+
+    public void setDose(int dose) {
+        this.dose = dose;
+    }
+
+    @Override
+    public String toString() {
+        return "MedicationTask{" +
+                "pill='" + pill + '\'' +
+                ", dose=" + dose +
+                '}';
+    }
+}
