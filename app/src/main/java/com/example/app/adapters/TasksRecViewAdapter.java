@@ -1,4 +1,4 @@
-package com.example.app.activities;
+package com.example.app.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,13 +9,14 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.R;
+import com.example.app.classesAna.MedicationTask;
+import com.example.app.classesAna.Task;
 
 import java.util.ArrayList;
 

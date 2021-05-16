@@ -3,7 +3,6 @@ package com.example.app.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.app.R;
-import com.example.app.activities.MedicationTask;
-import com.example.app.activities.Task;
-import com.example.app.activities.TasksRecViewAdapter;
+import com.example.app.classesAna.MedicationTask;
+import com.example.app.classesAna.Task;
+import com.example.app.adapters.TasksRecViewAdapter;
 
 import java.util.ArrayList;
 
