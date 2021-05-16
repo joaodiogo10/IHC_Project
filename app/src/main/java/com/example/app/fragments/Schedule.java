@@ -28,6 +28,7 @@ public class Schedule extends Fragment {
 
     public Schedule() {
         // Required empty public constructor
+        super(R.layout.fragment_schedule);
     }
 
     /**

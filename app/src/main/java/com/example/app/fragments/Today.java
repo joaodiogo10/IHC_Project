@@ -28,6 +28,7 @@ public class Today extends Fragment {
 
     public Today() {
         // Required empty public constructor
+        super(R.layout.fragment_today);
     }
 
     /**

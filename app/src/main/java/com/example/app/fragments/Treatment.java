@@ -28,6 +28,7 @@ public class Treatment extends Fragment {
 
     public Treatment() {
         // Required empty public constructor
+        super(R.layout.fragment_treatment);
     }
 
     /**
