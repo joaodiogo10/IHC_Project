@@ -18,10 +18,10 @@
         >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_margin="20dp"
-            app:srcCompat="@drawable/ic_pill" />
+            android:src="@drawable/ic_pill" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,10 +38,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_margin="20dp"
-            app:srcCompat="@drawable/ic_pill" />
+            android:src="@drawable/ic_heartbeat" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,10 +57,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_margin="20dp"
-            app:srcCompat="@drawable/symptom_check_smile_24"/>
+            android:src="@drawable/ic_shoes"/>
 
         <TextView
             android:layout_width="0dp"
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:srcCompat="@drawable/symptom_check_smile_24"/>
+            android:src="@drawable/ic_smile"/>
 
         <TextView
             android:layout_width="0dp"
