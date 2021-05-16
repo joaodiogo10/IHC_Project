@@ -14,10 +14,19 @@
         android:id="@+id/treatmentFragment"
         android:name="com.example.app.fragments.Treatment"
         android:label="fragment_treatment"
-        tools:layout="@layout/fragment_treatment" />
+        tools:layout="@layout/fragment_treatment">
+        <action
+            android:id="@+id/action_treatmentFragment_to_treatmentBottomSheetFragment"
+            app:destination="@id/treatmentBottomSheetFragment" />
+    </fragment>
     <fragment
         android:id="@+id/todayFragment"
         android:name="com.example.app.fragments.Today"
         android:label="fragment_today"
         tools:layout="@layout/fragment_today" />
+    <dialog
+        android:id="@+id/treatmentBottomSheetFragment"
+        android:name="com.example.app.fragments.TreatmentBottomSheetFragment"
+        android:label="treatment_bottom_sheet"
+        tools:layout="@layout/treatment_bottom_sheet"/>
 </navigation>
