@@ -24,6 +24,8 @@ import java.util.ArrayList;
  */
 public class Today extends Fragment {
 
+    private RecyclerView tasksRecView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
