@@ -6,9 +6,14 @@
     tools:context=".fragments.Today">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+<!--    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="today_frag" />
+        android:text="today_frag" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tasksTodayRecyclerView"/>
 
 </FrameLayout>
