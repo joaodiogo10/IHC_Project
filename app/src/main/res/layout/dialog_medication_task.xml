@@ -53,6 +53,26 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextDay" />
 
     <TextView
+        android:id="@+id/txtPill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Pill"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/editTextHour" />
+
+    <TextView
+        android:id="@+id/txtDose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Dose"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPill" />
+
+    <TextView
         android:id="@+id/txtNotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +80,7 @@
         android:text="Notes"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editTextHour" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDose" />
 
     <TextView
         android:id="@+id/editTextDay"
@@ -87,6 +107,32 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/txtHour" />
+
+    <TextView
+        android:id="@+id/editTextPill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/txtPill" />
+
+    <TextView
+        android:id="@+id/editTextDose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/txtDose" />
 
     <TextView
         android:id="@+id/editTextNotes"
@@ -138,6 +184,7 @@
             android:paddingTop="5dp"
             android:text="Confirm"
             android:textColor="@color/black" />
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline

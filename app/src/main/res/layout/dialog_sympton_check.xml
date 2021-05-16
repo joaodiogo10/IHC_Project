@@ -63,6 +63,16 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextHour" />
 
     <TextView
+        android:id="@+id/txtFeeling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Feeling"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNotes" />
+
+    <TextView
         android:id="@+id/editTextDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,6 +111,47 @@
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/txtNotes" />
 
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFeeling">
+
+        <RadioButton
+            android:id="@+id/cryingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/ic_emojis" />
+
+        <RadioButton
+            android:id="@+id/sadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/ic_sad" />
+
+        <RadioButton
+            android:id="@+id/neutralButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/ic_neutral" />
+
+        <RadioButton
+            android:id="@+id/happyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/ic_smile" />
+
+        <RadioButton
+            android:id="@+id/veryHappyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/ic_grinning" />
+
+    </RadioGroup>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -109,7 +160,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNotes">
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
         <Button
             android:id="@+id/buttonCancel"

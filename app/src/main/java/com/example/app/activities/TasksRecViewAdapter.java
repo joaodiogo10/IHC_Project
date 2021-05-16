@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,26 +54,16 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
                 tasks.get(position).setImage(R.drawable.ic_shoes);
                 holder.image.setImageResource(R.drawable.ic_shoes);
                 break;
+            case "Symptom Check":
+                tasks.get(position).setImage(R.drawable.ic_smile);
+                holder.image.setImageResource(R.drawable.ic_smile);
+                break;
         }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, tasks.get(position).getName(), Toast.LENGTH_LONG).show();
-                switch (tasks.get(position).getType()){
-                    case "Medication":
-                        MedicationTask task = (MedicationTask) tasks.get(position);
-                        showDialog(task.getName(), task.getDay(), task.getHour(), task.getPill(), String.valueOf(task.getDose()), task.getImage());
-                        break;
-                    case "Measurement":
-                        tasks.get(position).setImage(R.drawable.ic_heartbeat);
-                        holder.image.setImageResource(R.drawable.ic_heartbeat);
-                        break;
-                    case "Activity":
-                        tasks.get(position).setImage(R.drawable.ic_shoes);
-                        holder.image.setImageResource(R.drawable.ic_shoes);
-                        break;
-                }
+                showDialog(tasks.get(position));
             }
         });
     }
@@ -103,35 +93,45 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         }
     }
 
-    void showDialog(String name, String day, String hour, String pill, String dose, int image) {
+    //Notes missing
+    void showDialog(Task task) {
 
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog);
+
+        switch (task.getType()) {
+            case "Medication":
+                MedicationTask medicationTask = (MedicationTask) task;
+                dialog.setContentView(R.layout.dialog_medication_task);
+                TextView editTextPill = dialog.findViewById(R.id.editTextPill);
+                TextView editTextDose = dialog.findViewById(R.id.editTextDose);
+                editTextPill.setText(medicationTask.getPill());
+                editTextDose.setText(String.valueOf(medicationTask.getDose()));
+                break;
+            case "Symptom Check":
+                dialog.setContentView(R.layout.dialog_sympton_check);
+                break;
+            default:
+                dialog.setContentView(R.layout.dialog);
+                break;
+        }
 
         ImageView icon = dialog.findViewById(R.id.image);
-        icon.setImageResource(image);
-
         TextView taskName = dialog.findViewById(R.id.txtTaskName);
-        taskName.setText(name);
+        TextView editTextDay = dialog.findViewById(R.id.editTextDay);
+        TextView editTextHour = dialog.findViewById(R.id.editTextHour);
 
-        EditText editTextDay = dialog.findViewById(R.id.editTextDay);
-        editTextDay.setText(day);
-        editTextDay.setEnabled(false);
-
-        EditText editTextHour = dialog.findViewById(R.id.editTextHour);
-        editTextHour.setText(hour);
-        editTextHour.setEnabled(false);
-
-        EditText editTextPill = dialog.findViewById(R.id.editTextPill);
-        editTextPill.setText(pill);
-        editTextPill.setEnabled(false);
-
-        EditText editTextDose = dialog.findViewById(R.id.editTextDose);
-        editTextDose.setText(dose);
-        editTextDose.setEnabled(false);
+        icon.setImageResource(task.getImage());
+        taskName.setText(task.getName());
+        editTextDay.setText(task.getDay());
+        editTextHour.setText(task.getHour());
 
         dialog.show();
 
+        Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
+
+        buttonCancel.setOnClickListener( (v) -> {
+            dialog.dismiss();
+        });
     }
 }

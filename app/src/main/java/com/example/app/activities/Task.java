@@ -2,13 +2,13 @@ package com.example.app.activities;
 
 public class Task {
 
+    //notes missing
     private String type;
     private String name;
     private String day;
     private String hour;
     private int image;      //to save drawable image
 
-    //Image not needed maybe
     public Task(String type, String name, String day, String hour) {
         this.type = type;
         this.name = name;

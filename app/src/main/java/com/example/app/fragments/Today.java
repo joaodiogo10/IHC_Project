@@ -80,10 +80,9 @@ public class Today extends Fragment {
         tasks.add(new MedicationTask("Medication","Take pills", "15/05/2021","10:30", "Ben-u-ron", 1));
         tasks.add(new Task("Measurement","Measure blood pressure","15/05/2021", "15:20"));
         tasks.add(new Task("Activity","Running","15/05/2021", "18:00"));
+        tasks.add(new Task("Symptom Check","Symptom Check","15/05/2021", "20:00"));
 
         tasksRecView = view.findViewById(R.id.tasksTodayRecyclerView);
-       /* recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));*/
 
         TasksRecViewAdapter adapter = new TasksRecViewAdapter(view.getContext());
         adapter.setTasks(tasks);
