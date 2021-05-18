@@ -10,4 +10,6 @@
     <color name="green">#28d456</color>
     <color name="red">#d43f28</color>
     <color name="buttonTint">#34B3B6B0</color>
+    <color name="blue">#009EFD</color>
+    <color name="grey">#a9a9a9</color>
 </resources>
