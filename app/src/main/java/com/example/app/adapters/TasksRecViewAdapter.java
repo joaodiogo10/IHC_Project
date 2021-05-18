@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -110,7 +112,18 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
                 editTextDose.setText(String.valueOf(medicationTask.getDose()));
                 break;
             case "Symptom Check":
-                dialog.setContentView(R.layout.dialog_sympton_check);
+                dialog.setContentView(R.layout.dialog_symptom_check);
+                RadioGroup radioGroup = dialog.findViewById(R.id.radioGroup);
+
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton radioButton = (RadioButton) dialog.findViewById(checkedId);
+                        TextView feelingLegend = dialog.findViewById(R.id.txtFeelingLegend);
+                        feelingLegend.setVisibility(View.VISIBLE);
+                        feelingLegend.setText(radioButton.getText());
+                    }
+                });
                 break;
             default:
                 dialog.setContentView(R.layout.dialog);

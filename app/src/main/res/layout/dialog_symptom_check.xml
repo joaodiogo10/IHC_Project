@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="35dp"
-        android:layout_height="33dp"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -73,6 +73,19 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextNotes" />
 
     <TextView
+        android:id="@+id/txtFeelingLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Legend"
+        android:visibility="invisible"
+        android:textSize="12sp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/txtFeeling" />
+
+    <TextView
         android:id="@+id/editTextDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,37 +131,47 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFeeling">
+        app:layout_constraintTop_toBottomOf="@+id/txtFeelingLegend">
 
         <RadioButton
             android:id="@+id/cryingButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/ic_emojis" />
+            android:button="@drawable/ic_emojis"
+            android:text="very bad"
+            android:textSize="0sp" />
 
         <RadioButton
             android:id="@+id/sadButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/ic_sad" />
+            android:button="@drawable/ic_sad"
+            android:text="bad"
+            android:textSize="0sp"/>
 
         <RadioButton
             android:id="@+id/neutralButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/ic_neutral" />
+            android:button="@drawable/ic_neutral"
+            android:text="moderate"
+            android:textSize="0sp"/>
 
         <RadioButton
             android:id="@+id/happyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/ic_smile" />
+            android:button="@drawable/ic_smile"
+            android:text="good"
+            android:textSize="0sp"/>
 
         <RadioButton
             android:id="@+id/veryHappyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/ic_grinning" />
+            android:button="@drawable/ic_grinning"
+            android:text="very good"
+            android:textSize="0sp"/>
 
     </RadioGroup>
 
@@ -156,7 +179,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
