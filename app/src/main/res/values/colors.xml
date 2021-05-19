@@ -12,4 +12,5 @@
     <color name="buttonTint">#34B3B6B0</color>
     <color name="blue">#009EFD</color>
     <color name="grey">#a9a9a9</color>
+    <color name="dark_green">#38b000</color>
 </resources>

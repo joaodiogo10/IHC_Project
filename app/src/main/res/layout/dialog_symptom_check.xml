@@ -78,10 +78,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="Legend"
-        android:visibility="invisible"
-        android:textSize="12sp"
         android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="12sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/txtFeeling" />
 
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:button="@drawable/ic_sad"
             android:text="bad"
-            android:textSize="0sp"/>
+            android:textSize="0sp" />
 
         <RadioButton
             android:id="@+id/neutralButton"
@@ -155,7 +155,7 @@
             android:layout_height="wrap_content"
             android:button="@drawable/ic_neutral"
             android:text="moderate"
-            android:textSize="0sp"/>
+            android:textSize="0sp" />
 
         <RadioButton
             android:id="@+id/happyButton"
@@ -163,7 +163,7 @@
             android:layout_height="wrap_content"
             android:button="@drawable/ic_smile"
             android:text="good"
-            android:textSize="0sp"/>
+            android:textSize="0sp" />
 
         <RadioButton
             android:id="@+id/veryHappyButton"
@@ -171,7 +171,7 @@
             android:layout_height="wrap_content"
             android:button="@drawable/ic_grinning"
             android:text="very good"
-            android:textSize="0sp"/>
+            android:textSize="0sp" />
 
     </RadioGroup>
 
@@ -187,31 +187,34 @@
 
         <Button
             android:id="@+id/buttonCancel"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="0.5"
-            android:backgroundTint="@color/buttonTint"
+            android:background="@drawable/custom_button"
             android:drawableTop="@drawable/cancel_smaller"
-            android:drawableTint="@color/red"
+            app:drawableTint="@color/black"
             android:paddingTop="5dp"
             android:text="Cancel"
-            android:textColor="@color/black" />
+            android:elevation="0dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            app:backgroundTint="@color/white"
+            android:stateListAnimator="@null"/>
 
         <Button
             android:id="@+id/buttonCheck"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="0.5"
-            android:backgroundTint="@color/buttonTint"
+            android:background="@drawable/custom_button"
             android:drawableTop="@drawable/check_smaller"
-            android:drawableTint="@color/green"
+            app:drawableTint="@color/white"
             android:paddingTop="5dp"
             android:text="Confirm"
-            android:textColor="@color/black" />
+            android:textColor="@color/white"
+            app:backgroundTint="@color/dark_green" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
