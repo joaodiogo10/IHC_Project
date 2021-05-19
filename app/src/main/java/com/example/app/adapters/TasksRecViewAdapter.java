@@ -96,7 +96,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         }
     }
 
-    //Notes missing
+    //TODO:Notes missing
     void showDialog(Task task) {
 
         Dialog dialog = new Dialog(context);

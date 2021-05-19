@@ -5,7 +5,7 @@ public class MedicationTask extends Task {
     private String pill;
     private int dose;
 
-    public MedicationTask(String type, String name,String day, String hour, String pill, int dose) {
+    public MedicationTask(String type, String name, String day, String hour, String pill, int dose) {
         super(type, name, day, hour);
         this.pill = pill;
         this.dose = dose;
