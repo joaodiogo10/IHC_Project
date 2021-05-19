@@ -28,7 +28,7 @@ public class TreatmentBottomSheetFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.treatment_bottom_sheet, container, false);
+        return inflater.inflate(R.layout.fragment_treatment_bottom_sheet, container, false);
     }
 
     @Override

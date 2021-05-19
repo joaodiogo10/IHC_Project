@@ -28,5 +28,5 @@
         android:id="@+id/treatmentBottomSheetFragment"
         android:name="com.example.app.fragments.TreatmentBottomSheetFragment"
         android:label="treatment_bottom_sheet"
-        tools:layout="@layout/treatment_bottom_sheet"/>
+        tools:layout="@layout/fragment_treatment_bottom_sheet"/>
 </navigation>
