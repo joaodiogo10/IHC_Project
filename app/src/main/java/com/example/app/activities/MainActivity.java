@@ -1,8 +1,13 @@
 package com.example.app.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -32,7 +37,25 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.bottomNavHostFragment);
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+    }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        startActivity(intent);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
     }
 
 }

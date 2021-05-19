@@ -9,6 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App" >
+        <activity android:name=".activities.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.RegisterActivity" />
+
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:label="Profile"
+            android:parentActivityName=".activities.MainActivity"
+            />
+
         <activity
             android:name=".activities.AddActivityActivity"
             android:label="Add Activity"
@@ -28,11 +43,6 @@
         <activity
             android:name=".activities.MainActivity"
             android:launchMode="singleTop" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
