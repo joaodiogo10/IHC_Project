@@ -16,12 +16,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calender" />
+            android:text="@string/calendar" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lists" />
+            android:text="@string/lists" />
     </com.google.android.material.tabs.TabLayout>
 
     <FrameLayout
@@ -29,6 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonsLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         tools:layout_editor_absoluteX="-16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

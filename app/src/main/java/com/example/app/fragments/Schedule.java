@@ -29,7 +29,7 @@ public class Schedule extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ScheduleCalender calenderFrag = new ScheduleCalender();
+        ScheduleCalendar calenderFrag = new ScheduleCalendar();
         ScheduleLists listsFrag = new ScheduleLists();
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
