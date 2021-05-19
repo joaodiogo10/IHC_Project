@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="frequency_array">
+        <item>@string/frequency_daily_every_Xhours</item>
+        <item>@string/frequency_daily_Xtimes_day</item>
+        <item>@string/frequency_every_Xdays</item>
+        <item>@string/frequency_specific_days</item>
+    </string-array>
+</resources>

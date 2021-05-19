@@ -9,6 +9,10 @@
     <string name="treatment_measurement">Measurements</string>
     <string name="treatment_symptom_check">Symptom check</string>
     <string name="treatment_activity">Activity</string>
+    <string name="frequency_daily_Xtimes_day">Daily X times a day</string>
+    <string name="frequency_daily_every_Xhours">Daily every X hours</string>
+    <string name="frequency_every_Xdays">Every X days</string>
+    <string name="frequency_specific_days">Specific days of the week</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
