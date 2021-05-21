@@ -11,8 +11,6 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment {
 
-    public int value;
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
@@ -23,9 +21,5 @@ public class TimePickerFragment extends DialogFragment {
         // Create a new instance of TimePickerDialog and return it
         return new TimePickerDialog(getActivity(), (TimePickerDialog.OnTimeSetListener) getActivity(), hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
-    }
-
-    public void setValue(int value) {
-        this.value = value;
     }
 }

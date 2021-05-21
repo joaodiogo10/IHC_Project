@@ -1,17 +1,21 @@
 package com.example.app.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.R;
+import com.example.app.activities.AddMedicationActivity;
 import com.example.app.classesAna.Picker;
 import com.example.app.fragments.TimePickerFragment;
 
@@ -33,6 +37,10 @@ public class AddMedicationRecViewAdapter extends RecyclerView.Adapter<AddMedicat
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.add_medication_hour_dose, parent, false);
+        if (!context.getClass().getSimpleName().equals(" AddMedicationActivity ")) {
+            view.findViewById(R.id.txtDose).setVisibility(View.GONE);
+            view.findViewById(R.id.editDose).setVisibility(View.GONE);
+        }
         holder = new ViewHolder(view);
         return holder;
     }
@@ -71,6 +79,7 @@ public class AddMedicationRecViewAdapter extends RecyclerView.Adapter<AddMedicat
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private CardView cardView;
+        private TextView textDose;
         private EditText hours;
         private EditText dose;
 
@@ -79,6 +88,7 @@ public class AddMedicationRecViewAdapter extends RecyclerView.Adapter<AddMedicat
             cardView = itemView.findViewById(R.id.cardView);
             hours = itemView.findViewById(R.id.editHour);
             dose = itemView.findViewById(R.id.editDose);
+            textDose = itemView.findViewById(R.id.txtDose);
         }
     }
 }
