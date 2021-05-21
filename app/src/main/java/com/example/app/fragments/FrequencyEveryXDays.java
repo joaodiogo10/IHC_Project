@@ -4,25 +4,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.app.R;
 
-import org.w3c.dom.Text;
+public class FrequencyEveryXDays extends Fragment {
 
-public class FrequencyDailyEveryXHours extends Fragment {
-
+    private FrequencyXTimesADay frequencyXTimesADay;
     private View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_frequency_daily_every_x_hours, container, false);
+        view = inflater.inflate(R.layout.fragment_frequency_every_x_days, container, false);
+
+        frequencyXTimesADay = new FrequencyXTimesADay();
+
+        FragmentTransaction transactionXTimesADay = getChildFragmentManager().beginTransaction();
+        transactionXTimesADay.replace(R.id.frequencyHourFragmentContainer, frequencyXTimesADay).commit();
+
         return view;
     }
 
@@ -50,5 +55,9 @@ public class FrequencyDailyEveryXHours extends Fragment {
             first.setText("First Activity");
             last.setText("Last Activity");
         }
+    }
+
+    public FrequencyXTimesADay getFrequencyXTimesADay() {
+        return frequencyXTimesADay;
     }
 }
