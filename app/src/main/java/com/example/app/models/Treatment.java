@@ -4,24 +4,21 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.app.interfaces.Frequency;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Hashtable;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Map;
 
-
-public abstract class Treatment {
+public class Treatment<T extends Task> {
     private Frequency frequency;
     private String notes;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Map<LocalDate, Map<LocalTime, T>> tasks;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Treatment(Frequency frequency, String notes, LocalDate startDate, LocalDate endData) {
-        assert(LocalDate.now().compareTo(startDate) >= 0);
+        assert (LocalDate.now().compareTo(startDate) >= 0);
         this.frequency = frequency;
         this.notes = notes;
         this.startDate = startDate;
@@ -30,29 +27,62 @@ public abstract class Treatment {
 
     //verify if at given day there is any task
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public final boolean checkByDay(LocalDate date) {
-        if(date.compareTo(startDate) < 0 || endDate.compareTo(endDate) > 0) {
+    public boolean checkByDay(LocalDate date) {
+        if (date.compareTo(startDate) < 0 || endDate.compareTo(endDate) > 0) {
             return false;
         }
         return frequency.checkByDay(date);
     }
 
-    public final LocalDate getStartDate() {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void addTask(T task) {
+        assert (checkByDay(task.getDate()));
+        LocalDate date = task.getDate();
+        LocalTime time = task.getTime();
+        Map<LocalTime, T> dailyTasks = tasks.get(date);
+
+        if (dailyTasks == null) {
+            dailyTasks = new HashMap<>();
+        }
+        dailyTasks.put(time, task);
+        tasks.put(date, dailyTasks);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public T getTasksByDateTime(LocalDate date, LocalTime time) {
+        return tasks.get(date).get(time);
+    }
+
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public final LocalDate getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public final Frequency getFrequency() {
+    public Frequency getFrequency() {
         return frequency;
     }
 
-    public final String getNotes() {
+    public String getNotes() {
         return notes;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void fillTasks(HashMap<LocalTime, T> dailyTasks) {
+        Frequency frq = frequency;
+        LocalDate tmp = startDate;
+        int i = 0;
+
+        while (tmp.compareTo(endDate) <= 0) {
+            if (frq.checkByDay(tmp)) {
+                tasks.put(tmp, dailyTasks);
+            }
+            i++;
+            tmp = startDate.plusDays(i);
+        }
+    }
 
     @Override
     public String toString() {
@@ -62,16 +92,5 @@ public abstract class Treatment {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';
-    }
-
-
-    public static class DailyXTimesADay implements Frequency{
-        public boolean checkByDay(LocalDate date) {
-            return true;
-        }
-        @Override
-        public String toString() {
-            return "DailyXTimesADay";
-        }
     }
 }
