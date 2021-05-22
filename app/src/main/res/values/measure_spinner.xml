@@ -2,5 +2,8 @@
 <resources>
     <string-array name="measure_array">
         <item>"Blood Pressure"</item>
+        <item>"Weight"</item>
+        <item>"Blood Glucose"</item>
+        <item>"Heart Rate"</item>
     </string-array>
 </resources>

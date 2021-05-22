@@ -42,25 +42,9 @@ public class FrequencySpecificDaysWeek extends Fragment {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TextView first = view.findViewById(R.id.textViewFirstIntake);
-        TextView last = view.findViewById(R.id.textViewLastIntake);
-
         if (!getActivity().getClass().getSimpleName().equals("AddMedicationActivity")) {
             view.findViewById(R.id.textViewDose).setVisibility(View.GONE);
             view.findViewById(R.id.editTextDose).setVisibility(View.GONE);
-        }
-
-        if (getActivity().getClass().getSimpleName().equals("AddMeasurementActivity")) {
-            first.setText("First Measure");
-            last.setText("Last Measure");
-        }
-        else if (getActivity().getClass().getSimpleName().equals("AddSymptomCheckActivity")) {
-            first.setText("First Check");
-            last.setText("Last Check");
-        }
-        else if (getActivity().getClass().getSimpleName().equals("AddActivityActivity")) {
-            first.setText("First Activity");
-            last.setText("Last Activity");
         }
     }
 

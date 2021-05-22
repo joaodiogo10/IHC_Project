@@ -125,6 +125,9 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
                     }
                 });
                 break;
+            case "Measurement":
+                dialog.setContentView(R.layout.dialog_measurement);
+                break;
             default:
                 dialog.setContentView(R.layout.dialog);
                 break;
