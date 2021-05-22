@@ -37,7 +37,7 @@ public class AddMedicationRecViewAdapter extends RecyclerView.Adapter<AddMedicat
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.add_medication_hour_dose, parent, false);
-        if (!context.getClass().getSimpleName().equals(" AddMedicationActivity ")) {
+        if (!context.getClass().getSimpleName().equals("AddMedicationActivity")) {
             view.findViewById(R.id.txtDose).setVisibility(View.GONE);
             view.findViewById(R.id.editDose).setVisibility(View.GONE);
         }
