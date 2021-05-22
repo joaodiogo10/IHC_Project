@@ -7,8 +7,8 @@ import java.time.LocalTime;
 public class TaskMedication extends Task{
     private int dose;
 
-    public TaskMedication(LocalDate date, LocalTime time, State state, int dose) {
-        super(date, time,state);
+    public TaskMedication(LocalDate date, LocalTime time, int dose) {
+        super(date, time, State.PENDING);
         this.dose = dose;
     }
 
@@ -17,10 +17,12 @@ public class TaskMedication extends Task{
         this.dose = dose;
     }
 
-
-
     public int getDose() {
         return dose;
+    }
+
+    public void setDose(int dose) {
+        this.dose = dose;
     }
 
     @Override

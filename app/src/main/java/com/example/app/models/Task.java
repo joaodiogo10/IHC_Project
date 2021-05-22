@@ -6,13 +6,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public abstract class Task {
-
-
     public enum State {
         DONE,
-        SKIPPED,
-        PENDING,
-        EXPIRED
+        PENDING
     }
 
     private LocalDate date;
