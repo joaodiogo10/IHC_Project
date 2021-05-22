@@ -5,8 +5,8 @@ import java.time.LocalTime;
 
 public class TaskActivity extends Task{
 
-    public TaskActivity(LocalDate date, LocalTime time) {
-        super(date, time, State.PENDING);
+    public TaskActivity(LocalTime time, String name) {
+        super(time, State.PENDING, name);
     }
 
     public String toString() {

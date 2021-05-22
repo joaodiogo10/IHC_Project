@@ -4,14 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class TaskMeasurement extends Task{
-    enum MeasurementTask{
-        BLOODPRESSURE
+    public enum MeasurementTask{
+        BLOOD_PRESSURE
     }
     
     private int measurementValue;
     private MeasurementTask task;
-    public TaskMeasurement(LocalDate date, LocalTime time, MeasurementTask task) {
-        super(date, time, State.PENDING);
+
+    public TaskMeasurement(LocalTime time, MeasurementTask task, String name) {
+        super(time, State.PENDING, name);
         this.measurementValue = -1;
         this.task = task;
     }

@@ -12,8 +12,10 @@ public class EveryXDays extends Frequency{
     private int dayInterval;
     private LocalDate start;
 
+
     public EveryXDays(int dayInterval, LocalDate start) {
         this.dayInterval = dayInterval;
+        this.start = start;
     }
 
     public int getDayInterval() {
@@ -27,7 +29,7 @@ public class EveryXDays extends Frequency{
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public boolean checkByDay(LocalDate date) {
-        assert(date.compareTo(start) > 0);
+        assert(date.compareTo(start) >= 0);
         long nDays =  DAYS.between(start, date);
         return nDays % dayInterval == 0;
     }

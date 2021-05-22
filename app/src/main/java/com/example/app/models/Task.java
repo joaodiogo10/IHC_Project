@@ -1,8 +1,6 @@
 package com.example.app.models;
 
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public abstract class Task {
@@ -11,19 +9,18 @@ public abstract class Task {
         PENDING
     }
 
-    private LocalDate date;
     private LocalTime time;
     private State state;
+    private String name;
 
-
-    public Task(LocalDate date, LocalTime time, State state) {
-        this.date = date;
+    public Task(LocalTime time, State state, String name) {
         this.time = time;
         this.state = state;
+        this.name = name;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getName() {
+        return name;
     }
 
     public LocalTime getTime() {
@@ -34,6 +31,10 @@ public abstract class Task {
         return state;
     }
 
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
     public void setState(State state) {
         this.state = state;
     }
@@ -41,8 +42,7 @@ public abstract class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "date=" + date +
-                ", time=" + time +
+                " time=" + time +
                 ", state=" + state +
                 '}';
     }

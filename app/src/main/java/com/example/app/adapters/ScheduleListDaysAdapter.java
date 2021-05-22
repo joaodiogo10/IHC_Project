@@ -2,12 +2,14 @@ package com.example.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,15 +18,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app.R;
 import com.example.app.classesAna.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class ScheduleListDaysAdapter extends RecyclerView.Adapter<ScheduleListDaysAdapter.ViewHolder> {
-    ArrayList<String> listDays;
-    ArrayList<ArrayList<Task>> dailyTasks;
+    ArrayList<LocalDate> listDays;
+    Map<LocalDate, ArrayList<Task>>dailyTasks;
     Context context;
 
-    public ScheduleListDaysAdapter(Context context, ArrayList<String> listDays, ArrayList<ArrayList<Task>> dailyTasks) {
+    public ScheduleListDaysAdapter(Context context, ArrayList<LocalDate> listDays, Map<LocalDate, ArrayList<Task>> dailyTasks) {
         this.listDays = listDays;
         this.context = context;
         this.dailyTasks = dailyTasks;
@@ -38,13 +43,15 @@ public class ScheduleListDaysAdapter extends RecyclerView.Adapter<ScheduleListDa
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ScheduleListDaysAdapter.ViewHolder holder, int position) {
-        holder.day.setText(listDays.get(position));
+        LocalDate date = listDays.get(position);
+        holder.day.setText(capitalize(date.getDayOfWeek().toString())+ ", " + date.toString());
 
         //Initialize inner recycler
         TasksRecViewAdapter dailyAdapter = new TasksRecViewAdapter(context);
-        dailyAdapter.setTasks(dailyTasks.get(position));
+        dailyAdapter.setTasks(dailyTasks.get(listDays.get(position)));
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         holder.rvDailyTasks.setLayoutManager(layoutManager);
         holder.rvDailyTasks.setAdapter(dailyAdapter);
@@ -64,5 +71,9 @@ public class ScheduleListDaysAdapter extends RecyclerView.Adapter<ScheduleListDa
             day = itemView.findViewById(R.id.day);
             rvDailyTasks = itemView.findViewById(R.id.rvTasks);
         }
+    }
+
+    private String capitalize(String string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
     }
 }

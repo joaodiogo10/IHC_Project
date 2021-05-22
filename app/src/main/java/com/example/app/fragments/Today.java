@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.app.App;
 import com.example.app.R;
 import com.example.app.classesAna.MedicationTask;
 import com.example.app.classesAna.Task;
@@ -31,7 +33,6 @@ public class Today extends Fragment {
                              Bundle savedInstanceState) {
         getActivity().setTitle(R.string.nav_today);
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_today, container, false);
 
         ArrayList<Task> tasks = new ArrayList<>();

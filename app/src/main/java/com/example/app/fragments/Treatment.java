@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.app.App;
 import com.example.app.R;
 
 /**
@@ -24,7 +25,6 @@ public class Treatment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getActivity().setTitle(R.string.nav_treatment);
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_treatment, container, false);
     }

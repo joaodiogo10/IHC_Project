@@ -1,19 +1,13 @@
 package com.example.app.models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class TaskMedication extends Task{
     private int dose;
 
-    public TaskMedication(LocalDate date, LocalTime time, int dose) {
-        super(date, time, State.PENDING);
-        this.dose = dose;
-    }
-
-    public TaskMedication(int dose) {
-        super(null, null, State.PENDING);
+    public TaskMedication(LocalTime time,int dose, String name) {
+        super(time, State.PENDING, name);
         this.dose = dose;
     }
 

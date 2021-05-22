@@ -23,8 +23,8 @@ public class TaskSymptomCheck extends Task{
     }
 
     Feeling feeling;
-    public TaskSymptomCheck(LocalDate date, LocalTime time) {
-        super(date, time, State.PENDING);
+    public TaskSymptomCheck(LocalTime time, String name) {
+        super(time, State.PENDING, name);
         feeling = null;
     }
 

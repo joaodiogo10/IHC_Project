@@ -1,17 +1,25 @@
 package com.example.app.models;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DailyEveryXHours extends Frequency {
-    private int hours;
+    private int hourInterval;
 
-    public DailyEveryXHours(int hours) {
-        assert(hours <= 24);
-        this.hours = hours;
+    public DailyEveryXHours(int hourInterval) {
+        assert(hourInterval <= 24);
+        this.hourInterval = hourInterval;
     }
 
     public int getHourInterval() {
-        return hours;
+        return hourInterval;
     }
 
     @Override
@@ -21,6 +29,6 @@ public class DailyEveryXHours extends Frequency {
 
     @Override
     public String toString() {
-        return "Every " + hours + "hours";
+        return "Every " + hourInterval + " hours";
     }
 }
