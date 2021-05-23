@@ -11,16 +11,10 @@ public abstract class Task {
 
     private LocalTime time;
     private State state;
-    private String name;
 
-    public Task(LocalTime time, State state, String name) {
+    public Task(LocalTime time, State state) {
         this.time = time;
         this.state = state;
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public LocalTime getTime() {

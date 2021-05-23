@@ -9,12 +9,10 @@ public class TaskMeasurement extends Task{
     }
     
     private int measurementValue;
-
-    //TODO o que é isto?
     private MeasurementTask task;
 
-    public TaskMeasurement(LocalTime time, MeasurementTask task, String name) {
-        super(time, State.PENDING, name);
+    public TaskMeasurement(LocalTime time, MeasurementTask task) {
+        super(time, State.PENDING);
         this.measurementValue = -1;
         this.task = task;
     }

@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi;
 import java.lang.reflect.ParameterizedType;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class Treatment<T extends Task> {
+    private String name;
     private Frequency frequency;
     private String notes;
     private LocalDate startDate;
@@ -26,8 +28,9 @@ public class Treatment<T extends Task> {
     private Class<T> type;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public Treatment(Frequency frequency, String notes, LocalDate startDate, LocalDate endData, TreeMap<LocalTime, T> dailyTasks, Class<T> type) {
+    public Treatment(String name, Frequency frequency, String notes, LocalDate startDate, LocalDate endData, TreeMap<LocalTime, T> dailyTasks, Class<T> type) {
         assert (LocalDate.now().compareTo(startDate) >= 0);
+        this.name = name;
         this.frequency = frequency;
         this.notes = notes;
         this.startDate = startDate;
@@ -36,15 +39,6 @@ public class Treatment<T extends Task> {
         this.tasks = Collections.synchronizedSortedMap(new TreeMap<LocalDate, Map<LocalTime, T>>());
         this.type = type;
         initTasks();
-    }
-
-    //verify if at given day there is any task
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean checkByDay(LocalDate date) {
-        if (date.compareTo(startDate) < 0 || endDate.compareTo(endDate) > 0) {
-            return false;
-        }
-        return frequency.checkByDay(date);
     }
 
     /*
@@ -66,6 +60,7 @@ public class Treatment<T extends Task> {
     public Class<T> getType() {
         return this.type;
     }
+
     public Map<LocalDate, Map<LocalTime, T>> getTasks() {
         return tasks;
     }
@@ -75,8 +70,12 @@ public class Treatment<T extends Task> {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public T getTasksByDateTime(LocalDate date, LocalTime time) {
+    public T getTaskByDateTime(LocalDate date, LocalTime time) {
         return tasks.get(date).get(time);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public LocalDate getStartDate() {
@@ -95,19 +94,17 @@ public class Treatment<T extends Task> {
         return notes;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void initTasks() {
-        Frequency frq = frequency;
-        LocalDate tmp = startDate;
-        int i = 0;
+    public List<LocalTime> getDailyTasksHours() {
+        return new ArrayList<LocalTime>(dailyTasks.keySet());
+    }
 
-        while (tmp.compareTo(endDate) <= 0) {
-            if (frq.checkByDay(tmp)) {
-                tasks.put(tmp, dailyTasks);
-            }
-            i++;
-            tmp = startDate.plusDays(i);
+    //verify if at given day there is any task
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean checkByDay(LocalDate date) {
+        if (date.compareTo(startDate) < 0 || endDate.compareTo(endDate) > 0) {
+            return false;
         }
+        return frequency.checkByDay(date);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -133,5 +130,20 @@ public class Treatment<T extends Task> {
                 ",\n endDate=" + endDate +
                 ",\n dailyTasks=\n" + strDailyTasks +
                 ",\n tasks=\n" + strTasks+'}';
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void initTasks() {
+        Frequency frq = frequency;
+        LocalDate tmp = startDate;
+        int i = 0;
+
+        while (tmp.compareTo(endDate) <= 0) {
+            if (frq.checkByDay(tmp)) {
+                tasks.put(tmp, dailyTasks);
+            }
+            i++;
+            tmp = startDate.plusDays(i);
+        }
     }
 }
