@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.app.R;
@@ -33,6 +34,7 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
     private FrequencyXTimesADay frequencyXTimesADay;
     private FrequencyEveryXDays frequencyEveryXDays;
     private int selectedCardView;
+    private String taskName, pill, duration, notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,14 +95,14 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
             }
         });
 
-        Button btnSave = (Button) findViewById(R.id.buttonCheck);
+        /*Button btnSave = (Button) findViewById(R.id.buttonCheck);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
     }
 
     @Override
@@ -121,5 +123,26 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
     }
 
+    public void setValues() {
+        taskName = ((EditText) findViewById(R.id.editTextTaskName)).getText().toString();
+        pill = ((EditText) findViewById(R.id.editTextPill)).getText().toString();
+        duration = ((EditText) findViewById(R.id.editTextDuration)).getText().toString();
+        notes = ((EditText) findViewById(R.id.editTextNotes)).getText().toString();
+    }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public String getPill() {
+        return pill;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
 }

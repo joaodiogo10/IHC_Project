@@ -77,8 +77,8 @@ public class App extends Application {
         LocalTime secondTime = LocalTime.of(22, 15);
 
 
-        dailyTasks.put(fistTime, new TaskMeasurement(fistTime, TaskMeasurement.MeasurementTask.BLOOD_PRESSURE,"pica"));
-        dailyTasks.put(secondTime, new TaskMeasurement(secondTime, TaskMeasurement.MeasurementTask.BLOOD_PRESSURE,"pica"));
+        dailyTasks.put(fistTime, new TaskMeasurement(fistTime,"Heart Rate"));
+        dailyTasks.put(secondTime, new TaskMeasurement(secondTime,"Heart Rate"));
 
 
         LocalDate endDate = LocalDate.of(2021, 5, 24);

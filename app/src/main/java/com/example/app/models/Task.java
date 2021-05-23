@@ -1,6 +1,5 @@
 package com.example.app.models;
 
-
 import java.time.LocalTime;
 
 public abstract class Task {

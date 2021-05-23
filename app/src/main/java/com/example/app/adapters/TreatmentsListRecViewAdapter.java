@@ -38,8 +38,9 @@ public class TreatmentsListRecViewAdapter extends RecyclerView.Adapter<Treatment
         //TODO o treatment n tem nome
         //holder.txtTreatmentName.setText(treatments.get(position).getName());
 
-        //TODO como é que eu vou buscar as horas e que tipo de frequencia é?
+        //TODO como é que eu vou buscar as horas?
         //holder.txtHour.setText(treatments.get(position).getHour());
+        holder.txtFrequency.setText(treatments.get(position).getFrequency().toString());
 
         if (treatments.get(position).getType().equals(TaskMedication.class)) {
             holder.image.setImageResource(R.drawable.ic_pill);

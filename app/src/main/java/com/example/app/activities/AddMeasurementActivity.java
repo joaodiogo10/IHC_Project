@@ -26,6 +26,9 @@ public class AddMeasurementActivity extends AppCompatActivity implements TimePic
     private FrequencyEveryXDays frequencyEveryXDays;
     private FrequencyDailyEveryXHours frequencyDailyEveryXHours;
     private int selectedCardView;
+    private String selectedMeasure;
+    private Spinner spinnerMeasure;
+    private String notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class AddMeasurementActivity extends AppCompatActivity implements TimePic
         setContentView(R.layout.activity_add_measurement);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Spinner spinnerMeasure = (Spinner) findViewById(R.id.spinnerMeasure);
+        spinnerMeasure = (Spinner) findViewById(R.id.spinnerMeasure);
         ArrayAdapter<CharSequence> adapterMeasure = ArrayAdapter.createFromResource(this, R.array.measure_array, android.R.layout.simple_spinner_item);
         adapterMeasure.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMeasure.setAdapter(adapterMeasure);
@@ -104,5 +107,18 @@ public class AddMeasurementActivity extends AppCompatActivity implements TimePic
         }
         EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
         editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+    }
+
+    public String getSelectedMeasure() {
+        return selectedMeasure;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setValues() {
+        selectedMeasure = spinnerMeasure.getSelectedItem().toString();
+        notes = ((EditText) findViewById(R.id.editTextNotes)).getText().toString();
     }
 }
