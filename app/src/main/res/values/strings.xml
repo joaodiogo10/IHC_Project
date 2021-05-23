@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nav_today">Today</string>
     <string name="nav_schedule">Schedule</string>
-    <string name="nav_treatment">Treatment</string>
+    <string name="nav_treatment">Treatments</string>
     <string name="treatment_medication">Medication</string>
     <string name="treatment_measurement">Measurements</string>
     <string name="treatment_symptom_check">Symptom check</string>

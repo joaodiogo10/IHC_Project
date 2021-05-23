@@ -9,6 +9,8 @@ public class TaskMeasurement extends Task{
     }
     
     private int measurementValue;
+
+    //TODO o que é isto?
     private MeasurementTask task;
 
     public TaskMeasurement(LocalTime time, MeasurementTask task, String name) {

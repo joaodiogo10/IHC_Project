@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -91,6 +92,15 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
 
             }
         });
+
+        Button btnSave = (Button) findViewById(R.id.buttonCheck);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -110,4 +120,6 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
         editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
     }
+
+
 }
