@@ -128,9 +128,9 @@ public class App extends Application {
         //Log.d("Test", treatment.toString());
 
         TaskMedication medTask = treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 2)).get(LocalTime.of(8, 30));
-        //medTask.setState(Task.State.DONE);
-        //Log.d("Test", treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 2)).toString());
-        //Log.d("Test", treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 3)).toString());
+        medTask.setState(Task.State.DONE);
+        Log.d("Test", "2021/5/2 :" + treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 2)).toString());
+        Log.d("Test", "2021/5/3 :" + treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 3)).toString());
         App.listTreatment.add(treatment);
     }
 }

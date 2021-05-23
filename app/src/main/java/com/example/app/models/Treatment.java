@@ -4,6 +4,7 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.SortedList;
 
 import java.lang.reflect.ParameterizedType;
 import java.time.LocalDate;
@@ -137,10 +138,24 @@ public class Treatment<T extends Task> {
         Frequency frq = frequency;
         LocalDate tmp = startDate;
         int i = 0;
+        SortedMap<LocalTime, T> clonedMap;
 
         while (tmp.compareTo(endDate) <= 0) {
             if (frq.checkByDay(tmp)) {
-                tasks.put(tmp, dailyTasks);
+                clonedMap = new TreeMap<>();
+
+                for (LocalTime time:
+                     dailyTasks.keySet()) {
+
+                    try {
+                        T task =  dailyTasks.get(time);
+                        T clone = (T) ((T) task).clone();
+                        clonedMap.put(time,clone);
+                     } catch(CloneNotSupportedException e) {
+
+                    }
+                }
+                tasks.put(tmp, clonedMap);
             }
             i++;
             tmp = startDate.plusDays(i);
