@@ -5,12 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Today">
 
-    <!-- TODO: Update blank fragment layout -->
-<!--    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="today_frag" />-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
