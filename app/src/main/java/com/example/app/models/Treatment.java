@@ -142,7 +142,7 @@ public class Treatment<T extends Task> {
 
         while (tmp.compareTo(endDate) <= 0) {
             if (frq.checkByDay(tmp)) {
-                clonedMap = new TreeMap<>();
+                clonedMap = Collections.synchronizedSortedMap(new TreeMap<>());
 
                 for (LocalTime time:
                      dailyTasks.keySet()) {
