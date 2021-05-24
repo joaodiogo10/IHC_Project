@@ -30,6 +30,7 @@ public class FrequencyXTimesADay extends Fragment {
     private RecyclerView pickerRecView;
     private AddMedicationRecViewAdapter recAdapter;
     private View view;
+    private ArrayList<Picker> picker;
     //private Picker defaultPicker = new Picker("8:10", 1);
 
     @Nullable
@@ -37,7 +38,7 @@ public class FrequencyXTimesADay extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_frequency_x_times_a_day, container, false);
 
-        ArrayList<Picker> picker = new ArrayList<>();
+        picker = new ArrayList<>();
 
         picker.add(new Picker("8:10", 1));
 
@@ -68,4 +69,9 @@ public class FrequencyXTimesADay extends Fragment {
     public AddMedicationRecViewAdapter getAddMedicationRecViewAdapter() {
         return recAdapter;
     }
+
+    public ArrayList<Picker> getFinalPicker () {
+        return recAdapter.getPicker();
+    }
+
 }
