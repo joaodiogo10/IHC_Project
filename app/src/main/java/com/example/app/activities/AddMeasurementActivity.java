@@ -54,7 +54,7 @@ public class AddMeasurementActivity extends AppCompatActivity implements TimePic
 
                 switch (selectItemText) {
                     case "Daily X times a day":
-                        frequencyXTimesADay = new FrequencyXTimesADay();
+                        frequencyXTimesADay = new FrequencyXTimesADay(true);
 
                         FragmentTransaction transactionXTimesADay = getSupportFragmentManager().beginTransaction();
                         transactionXTimesADay.replace(R.id.frequencyFragmentContainer, frequencyXTimesADay).commit();

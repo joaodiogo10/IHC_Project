@@ -49,7 +49,7 @@ public class FrequencySpecificDaysWeek extends Fragment {
         MaterialDayPicker dayPicker = view.findViewById(R.id.day_picker);
         dayPicker.setLocale(Locale.ENGLISH);
 
-        frequencyXTimesADay = new FrequencyXTimesADay();
+        frequencyXTimesADay = new FrequencyXTimesADay(false);
 
         FragmentTransaction transactionXTimesADay = getChildFragmentManager().beginTransaction();
         transactionXTimesADay.replace(R.id.frequencyHourFragmentContainer, frequencyXTimesADay).commit();

@@ -43,7 +43,7 @@ public class FrequencyEveryXDays extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_frequency_every_x_days, container, false);
 
-        frequencyXTimesADay = new FrequencyXTimesADay();
+        frequencyXTimesADay = new FrequencyXTimesADay(false);
 
         FragmentTransaction transactionXTimesADay = getChildFragmentManager().beginTransaction();
         transactionXTimesADay.replace(R.id.frequencyHourFragmentContainer, frequencyXTimesADay).commit();
