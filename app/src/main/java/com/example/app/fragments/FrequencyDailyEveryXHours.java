@@ -1,5 +1,7 @@
 package com.example.app.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,7 +86,10 @@ public class FrequencyDailyEveryXHours extends Fragment {
                     notes = activity.getNotes();
                     createActivityTreatment(name, notes, 5);
                 }
-
+                getActivity().finish();
+                Context context = getActivity().getApplicationContext();
+                Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+                toast.show();
                 //TODO falta sair daqui
             }
         });

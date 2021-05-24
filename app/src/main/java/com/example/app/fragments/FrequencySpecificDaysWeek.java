@@ -1,5 +1,7 @@
 package com.example.app.fragments;
 
+import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +24,7 @@ import com.example.app.activities.AddActivityActivity;
 import com.example.app.activities.AddMeasurementActivity;
 import com.example.app.activities.AddMedicationActivity;
 import com.example.app.activities.AddSymptomCheckActivity;
+import com.example.app.activities.MainActivity;
 import com.example.app.classesAna.Picker;
 import com.example.app.models.EveryXDays;
 import com.example.app.models.SpecificDaysOfWeek;
@@ -109,8 +113,10 @@ public class FrequencySpecificDaysWeek extends Fragment {
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
                     createActivityTreatment(name, notes, 5, picker, daysOfWeek);
                 }
-
-
+                Context context = getActivity().getApplicationContext();
+                Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_LONG);
+                toast.show();
+                getActivity().finish();
                 //TODO falta sair daqui
             }
         });

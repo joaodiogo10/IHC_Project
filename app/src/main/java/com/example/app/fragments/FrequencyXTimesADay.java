@@ -1,6 +1,7 @@
 package com.example.app.fragments;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -127,7 +129,11 @@ public class FrequencyXTimesADay extends Fragment {
                         notes = activity.getNotes();
                         createActivityTreatment(name, notes, 5);
                     }
-
+                    getActivity().finish();
+                    Context context = getActivity().getApplicationContext();
+                    Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+                    toast.show();
+                    getActivity().finish();
                     //TODO mudar de pagina
                 }
             });
