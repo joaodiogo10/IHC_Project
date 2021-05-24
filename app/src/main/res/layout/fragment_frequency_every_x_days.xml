@@ -42,31 +42,6 @@
         app:layout_constraintStart_toEndOf="@+id/editTextRemindDays"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewDose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="44dp"
-        android:text="Dose"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRemindDays" />
-
-    <EditText
-        android:id="@+id/editTextDose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="e.g.: 1"
-        android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRemindDays" />
-
     <FrameLayout
         android:id="@+id/frequencyHourFragmentContainer"
         android:layout_width="match_parent"
@@ -74,7 +49,7 @@
         android:layout_marginTop="15dp"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDose"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDays"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="52dp" />
 

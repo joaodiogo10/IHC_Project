@@ -100,10 +100,9 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         CardView cardView;
-        //TODO experiencia pra mudar os elementos do picker
-        AddMedicationRecViewAdapter recAdapter = new AddMedicationRecViewAdapter(view.getContext());
-        ArrayList<Picker> picker = new ArrayList<>();
-        int position = 0;
+        AddMedicationRecViewAdapter recAdapter;
+        ArrayList<Picker> picker;
+        int position;
         switch (selectedCardView) {
             case 1:
                 cardView = (CardView) frequencyEveryXDays.getFrequencyXTimesADay().getPickerRecView().findViewWithTag(frequencyEveryXDays.getFrequencyXTimesADay().getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
@@ -113,6 +112,9 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
                 break;
             case 2:
                 cardView = (CardView) frequencySpecificDaysWeek.getFrequencyXTimesADay().getPickerRecView().findViewWithTag(frequencySpecificDaysWeek.getFrequencyXTimesADay().getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
+                recAdapter = frequencySpecificDaysWeek.getFrequencyXTimesADay().getAddMedicationRecViewAdapter();
+                position = recAdapter.currentPosition;
+                picker = recAdapter.getPicker();
                 break;
             default:
                 cardView = (CardView) frequencyXTimesADay.getPickerRecView().findViewWithTag(frequencyXTimesADay.getAddMedicationRecViewAdapter().getCardViewSelectedPosition());

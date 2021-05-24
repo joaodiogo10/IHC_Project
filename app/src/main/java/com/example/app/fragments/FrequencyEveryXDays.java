@@ -66,6 +66,9 @@ public class FrequencyEveryXDays extends Fragment {
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
                     createMedicationTreatment(name, pill, notes, duration, picker);
                 }
+
+
+                //TODO falta sair daqui
             }
         });
 
