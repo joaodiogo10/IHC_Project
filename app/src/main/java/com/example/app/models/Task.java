@@ -1,6 +1,5 @@
 package com.example.app.models;
 
-
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
