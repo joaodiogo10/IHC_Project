@@ -2,6 +2,8 @@ package com.example.app.adapters;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ public class AddMedicationRecViewAdapter extends RecyclerView.Adapter<AddMedicat
     private View view;
     private ViewHolder holder;
     private int cardViewSelectedPosition;
+    public int currentPosition;
 
     public AddMedicationRecViewAdapter(Context context) {
         this.context = context;
@@ -52,8 +55,26 @@ public class AddMedicationRecViewAdapter extends RecyclerView.Adapter<AddMedicat
             public void onClick(View v) {
                 TimePickerFragment pickerFragment = new TimePickerFragment();
                 holder.cardView.setTag(position);
+                currentPosition = position;
                 setCardViewSelectedPosition(position);
                 pickerFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "Time Picker");
+            }
+        });
+
+        holder.dose.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                picker.get(position).setDose(Integer.parseInt(s.toString()));
             }
         });
     }
@@ -74,6 +95,10 @@ public class AddMedicationRecViewAdapter extends RecyclerView.Adapter<AddMedicat
     public void setHoursDose(ArrayList<Picker> hoursDose) {
         this.picker = hoursDose;
         notifyDataSetChanged();
+    }
+
+    public ArrayList<Picker> getPicker() {
+        return picker;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

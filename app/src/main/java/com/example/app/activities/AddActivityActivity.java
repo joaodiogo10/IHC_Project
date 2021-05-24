@@ -14,10 +14,14 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.example.app.R;
+import com.example.app.adapters.AddMedicationRecViewAdapter;
+import com.example.app.classesAna.Picker;
 import com.example.app.fragments.FrequencyDailyEveryXHours;
 import com.example.app.fragments.FrequencyEveryXDays;
 import com.example.app.fragments.FrequencySpecificDaysWeek;
 import com.example.app.fragments.FrequencyXTimesADay;
+
+import java.util.ArrayList;
 
 public class AddActivityActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
@@ -26,6 +30,8 @@ public class AddActivityActivity extends AppCompatActivity implements TimePicker
     private FrequencyEveryXDays frequencyEveryXDays;
     private FrequencyDailyEveryXHours frequencyDailyEveryXHours;
     private int selectedCardView;
+    private String activityName;
+    private String notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +52,7 @@ public class AddActivityActivity extends AppCompatActivity implements TimePicker
 
                 switch (selectItemText) {
                     case "Daily X times a day":
-                        frequencyXTimesADay = new FrequencyXTimesADay();
+                        frequencyXTimesADay = new FrequencyXTimesADay(true);
 
                         FragmentTransaction transactionXTimesADay = getSupportFragmentManager().beginTransaction();
                         transactionXTimesADay.replace(R.id.frequencyFragmentContainer, frequencyXTimesADay).commit();
@@ -86,18 +92,48 @@ public class AddActivityActivity extends AppCompatActivity implements TimePicker
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         CardView cardView;
+        AddMedicationRecViewAdapter recAdapter;
+        ArrayList<Picker> picker;
+        int position;
         switch (selectedCardView) {
             case 1:
                 cardView = (CardView) frequencyEveryXDays.getFrequencyXTimesADay().getPickerRecView().findViewWithTag(frequencyEveryXDays.getFrequencyXTimesADay().getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
+                recAdapter = frequencyEveryXDays.getFrequencyXTimesADay().getAddMedicationRecViewAdapter();
+                position = recAdapter.currentPosition;
+                picker = recAdapter.getPicker();
                 break;
             case 2:
                 cardView = (CardView) frequencySpecificDaysWeek.getFrequencyXTimesADay().getPickerRecView().findViewWithTag(frequencySpecificDaysWeek.getFrequencyXTimesADay().getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
+                recAdapter = frequencySpecificDaysWeek.getFrequencyXTimesADay().getAddMedicationRecViewAdapter();
+                position = recAdapter.currentPosition;
+                picker = recAdapter.getPicker();
                 break;
             default:
                 cardView = (CardView) frequencyXTimesADay.getPickerRecView().findViewWithTag(frequencyXTimesADay.getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
+                recAdapter = frequencyXTimesADay.getAddMedicationRecViewAdapter();
+                position = recAdapter.currentPosition;
+                picker = recAdapter.getPicker();
                 break;
         }
+
         EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
         editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+
+        picker.get(position).setHour(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+
+        recAdapter.setHoursDose(picker);
+    }
+
+    public void setValues() {
+        activityName = ((EditText) findViewById(R.id.editTextTaskName)).getText().toString();
+        notes = ((EditText) findViewById(R.id.editTextNotes)).getText().toString();
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 }
