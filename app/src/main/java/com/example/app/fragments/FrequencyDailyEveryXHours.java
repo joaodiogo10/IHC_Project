@@ -16,12 +16,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.app.App;
 import com.example.app.R;
+import com.example.app.activities.AddActivityActivity;
 import com.example.app.activities.AddMeasurementActivity;
 import com.example.app.activities.AddMedicationActivity;
+import com.example.app.activities.AddSymptomCheckActivity;
 import com.example.app.models.DailyEveryXHours;
 import com.example.app.models.Frequency;
+import com.example.app.models.TaskActivity;
 import com.example.app.models.TaskMeasurement;
 import com.example.app.models.TaskMedication;
+import com.example.app.models.TaskSymptomCheck;
 import com.example.app.models.Treatment;
 
 import org.w3c.dom.Text;
@@ -65,6 +69,19 @@ public class FrequencyDailyEveryXHours extends Fragment {
                     name = activity.getSelectedMeasure();
                     notes = activity.getNotes();
                     createMeasurementTreatment(name, notes, 5); //5 duraçao provisoria
+                } else if (getActivity().getClass().equals(AddSymptomCheckActivity.class)) {
+                    //TODO acrescentar duration??
+                    AddSymptomCheckActivity activity = (AddSymptomCheckActivity) getActivity();
+                    activity.setValues();
+                    name = activity.getSymptomName();
+                    notes = activity.getNotes();
+                    createSymptomCheckTreatment(name, notes, 5); //duraçao provisoria
+                } else {
+                    AddActivityActivity activity = (AddActivityActivity) getActivity();
+                    activity.setValues();
+                    name = activity.getActivityName();
+                    notes = activity.getNotes();
+                    createActivityTreatment(name, notes, 5);
                 }
 
                 //TODO falta sair daqui
@@ -149,6 +166,60 @@ public class FrequencyDailyEveryXHours extends Fragment {
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
         com.example.app.models.Treatment<TaskMeasurement> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskMeasurement.class);
+
+        App.listTreatment.add(treatment);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void createSymptomCheckTreatment(String name, String notes, int duration) {
+        TreeMap<LocalTime, TaskSymptomCheck> dailyTasks = new TreeMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        //TODO estes textos tem de estar 08:00
+        LocalTime firstHour = LocalTime.parse(((EditText) view.findViewById(R.id.editTextFirstIntake)).getText().toString(), formatter);
+        LocalTime lastHour = LocalTime.parse(((EditText) view.findViewById(R.id.editTextLastIntake)).getText().toString(), formatter);
+
+        int interval = Integer.parseInt(((EditText) view.findViewById(R.id.editTextRemind)).getText().toString());
+
+        DailyEveryXHours frq = new DailyEveryXHours(interval);
+        List<LocalTime> tasksHours = Frequency.getHoursWithinTime(firstHour, lastHour, interval);
+
+        for (LocalTime hour :
+                tasksHours) {
+            TaskSymptomCheck task = new TaskSymptomCheck(hour, name);
+            dailyTasks.put(hour, task);
+        }
+
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+        com.example.app.models.Treatment<TaskSymptomCheck> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskSymptomCheck.class);
+
+        App.listTreatment.add(treatment);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void createActivityTreatment(String name, String notes, int duration) {
+        TreeMap<LocalTime, TaskActivity> dailyTasks = new TreeMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        //TODO estes textos tem de estar 08:00
+        LocalTime firstHour = LocalTime.parse(((EditText) view.findViewById(R.id.editTextFirstIntake)).getText().toString(), formatter);
+        LocalTime lastHour = LocalTime.parse(((EditText) view.findViewById(R.id.editTextLastIntake)).getText().toString(), formatter);
+
+        int interval = Integer.parseInt(((EditText) view.findViewById(R.id.editTextRemind)).getText().toString());
+
+        DailyEveryXHours frq = new DailyEveryXHours(interval);
+        List<LocalTime> tasksHours = Frequency.getHoursWithinTime(firstHour, lastHour, interval);
+
+        for (LocalTime hour :
+                tasksHours) {
+            TaskActivity task = new TaskActivity(hour, name);
+            dailyTasks.put(hour, task);
+        }
+
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+        com.example.app.models.Treatment<TaskActivity> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskActivity.class);
 
         App.listTreatment.add(treatment);
     }

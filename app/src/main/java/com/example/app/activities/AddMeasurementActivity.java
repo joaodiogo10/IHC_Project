@@ -14,10 +14,14 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.example.app.R;
+import com.example.app.adapters.AddMedicationRecViewAdapter;
+import com.example.app.classesAna.Picker;
 import com.example.app.fragments.FrequencyDailyEveryXHours;
 import com.example.app.fragments.FrequencyEveryXDays;
 import com.example.app.fragments.FrequencySpecificDaysWeek;
 import com.example.app.fragments.FrequencyXTimesADay;
+
+import java.util.ArrayList;
 
 public class AddMeasurementActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
@@ -94,19 +98,36 @@ public class AddMeasurementActivity extends AppCompatActivity implements TimePic
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         CardView cardView;
+        AddMedicationRecViewAdapter recAdapter;
+        ArrayList<Picker> picker;
+        int position;
         switch (selectedCardView) {
             case 1:
                 cardView = (CardView) frequencyEveryXDays.getFrequencyXTimesADay().getPickerRecView().findViewWithTag(frequencyEveryXDays.getFrequencyXTimesADay().getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
+                recAdapter = frequencyEveryXDays.getFrequencyXTimesADay().getAddMedicationRecViewAdapter();
+                position = recAdapter.currentPosition;
+                picker = recAdapter.getPicker();
                 break;
             case 2:
                 cardView = (CardView) frequencySpecificDaysWeek.getFrequencyXTimesADay().getPickerRecView().findViewWithTag(frequencySpecificDaysWeek.getFrequencyXTimesADay().getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
+                recAdapter = frequencySpecificDaysWeek.getFrequencyXTimesADay().getAddMedicationRecViewAdapter();
+                position = recAdapter.currentPosition;
+                picker = recAdapter.getPicker();
                 break;
             default:
                 cardView = (CardView) frequencyXTimesADay.getPickerRecView().findViewWithTag(frequencyXTimesADay.getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
+                recAdapter = frequencyXTimesADay.getAddMedicationRecViewAdapter();
+                position = recAdapter.currentPosition;
+                picker = recAdapter.getPicker();
                 break;
         }
+
         EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
         editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+
+        picker.get(position).setHour(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+
+        recAdapter.setHoursDose(picker);
     }
 
     public String getSelectedMeasure() {

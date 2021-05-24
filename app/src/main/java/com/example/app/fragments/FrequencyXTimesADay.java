@@ -21,13 +21,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.App;
 import com.example.app.R;
+import com.example.app.activities.AddActivityActivity;
 import com.example.app.activities.AddMeasurementActivity;
 import com.example.app.activities.AddMedicationActivity;
+import com.example.app.activities.AddSymptomCheckActivity;
 import com.example.app.adapters.AddMedicationRecViewAdapter;
+import com.example.app.adapters.TasksRecViewAdapter;
 import com.example.app.classesAna.Picker;
+import com.example.app.models.DailyEveryXHours;
 import com.example.app.models.DailyXTimesADay;
 import com.example.app.models.EveryXDays;
+import com.example.app.models.Frequency;
+import com.example.app.models.TaskActivity;
+import com.example.app.models.TaskMeasurement;
 import com.example.app.models.TaskMedication;
+import com.example.app.models.TaskSymptomCheck;
 import com.example.app.models.Treatment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -37,6 +45,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 public class FrequencyXTimesADay extends Fragment {
@@ -103,7 +112,20 @@ public class FrequencyXTimesADay extends Fragment {
                         activity.setValues();
                         name = activity.getSelectedMeasure();
                         notes = activity.getNotes();
-                        //createMeasurementTreatment(name, notes, 5); //5 duraçao provisoria
+                        createMeasurementTreatment(name, notes, 5); //5 duraçao provisoria
+                    } else if (getActivity().getClass().equals(AddSymptomCheckActivity.class)) {
+                        //TODO acrescentar duration??
+                        AddSymptomCheckActivity activity = (AddSymptomCheckActivity) getActivity();
+                        activity.setValues();
+                        name = activity.getSymptomName();
+                        notes = activity.getNotes();
+                        createSymptomCheckTreatment(name, notes, 5); //duraçao provisoria
+                    } else {
+                        AddActivityActivity activity = (AddActivityActivity) getActivity();
+                        activity.setValues();
+                        name = activity.getActivityName();
+                        notes = activity.getNotes();
+                        createActivityTreatment(name, notes, 5);
                     }
 
                     //TODO mudar de pagina
@@ -150,4 +172,63 @@ public class FrequencyXTimesADay extends Fragment {
         App.listTreatment.add(treatment);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void createMeasurementTreatment(String name, String notes, int duration) {
+        LocalDate startDate = LocalDate.now();
+        TreeMap<LocalTime, TaskMeasurement> dailyTasks = new TreeMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        DailyXTimesADay frq = new DailyXTimesADay();
+
+        for (int i = 0; i < picker.size(); i++) {
+            LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
+            TaskMeasurement task = new TaskMeasurement(hour,name);
+            dailyTasks.put(hour, task);
+        }
+
+        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+        com.example.app.models.Treatment<TaskMeasurement> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskMeasurement.class);
+
+        App.listTreatment.add(treatment);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void createSymptomCheckTreatment(String name, String notes, int duration) {
+        LocalDate startDate = LocalDate.now();
+        TreeMap<LocalTime, TaskSymptomCheck> dailyTasks = new TreeMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        DailyXTimesADay frq = new DailyXTimesADay();
+
+        for (int i = 0; i < picker.size(); i++) {
+            LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
+            TaskSymptomCheck task = new TaskSymptomCheck(hour,name);
+            dailyTasks.put(hour, task);
+        }
+
+        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+        com.example.app.models.Treatment<TaskSymptomCheck> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskSymptomCheck.class);
+
+        App.listTreatment.add(treatment);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void createActivityTreatment(String name, String notes, int duration) {
+        LocalDate startDate = LocalDate.now();
+        TreeMap<LocalTime, TaskActivity> dailyTasks = new TreeMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        DailyXTimesADay frq = new DailyXTimesADay();
+
+        for (int i = 0; i < picker.size(); i++) {
+            LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
+            TaskActivity task = new TaskActivity(hour,name);
+            dailyTasks.put(hour, task);
+        }
+
+        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+        com.example.app.models.Treatment<TaskActivity> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskActivity.class);
+
+        App.listTreatment.add(treatment);
+    }
 }
