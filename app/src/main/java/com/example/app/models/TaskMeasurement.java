@@ -17,7 +17,7 @@ public class TaskMeasurement extends Task {
 
 
     public TaskMeasurement(LocalTime time, String name) {
-        super(time, State.PENDING, name);
+        super(time, State.PENDING);
 
         this.measurementValue = -1;
         setMeasurementTask(name);
