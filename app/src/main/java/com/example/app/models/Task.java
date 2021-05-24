@@ -1,8 +1,13 @@
 package com.example.app.models;
 
+
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.time.LocalTime;
 
-public abstract class Task {
+public abstract class Task implements Cloneable{
     public enum State {
         DONE,
         PENDING
@@ -10,16 +15,10 @@ public abstract class Task {
 
     private LocalTime time;
     private State state;
-    private String name;
 
-    public Task(LocalTime time, State state, String name) {
+    public Task(LocalTime time, State state) {
         this.time = time;
         this.state = state;
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public LocalTime getTime() {
@@ -44,5 +43,11 @@ public abstract class Task {
                 " time=" + time +
                 ", state=" + state +
                 '}';
+    }
+
+    @NonNull
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return (Task) super.clone();
     }
 }

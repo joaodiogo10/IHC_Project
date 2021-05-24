@@ -85,57 +85,57 @@ public class Today extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void treatmentHandlerPicker(Treatment treatment, Map<LocalTime, Task> dailyTasks) {
         if (treatment.getType().equals(TaskMedication.class)) {
-            handleMedicationTask(dailyTasks);
+            handleMedicationTask(dailyTasks, treatment.getName());
         } else if (treatment.getType().equals(TaskActivity.class)) {
-            handleActivityTask(dailyTasks);
+            handleActivityTask(dailyTasks, treatment.getName());
         } else if (treatment.getType().equals(TaskMeasurement.class)) {
-            handleMeasurementTask(dailyTasks);
+            handleMeasurementTask(dailyTasks, treatment.getName());
         } else {
-            handleSymptomCheckTask(dailyTasks);
+            handleSymptomCheckTask(dailyTasks, treatment.getName());
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleSymptomCheckTask(Map<LocalTime, Task> dailyTasks) {
+    private void handleSymptomCheckTask(Map<LocalTime, Task> dailyTasks, String treatmentName) {
 
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
             TaskSymptomCheck task = (TaskSymptomCheck) dailyTasks.get(time);
-            todayTasksShow.add(new com.example.app.classesAna.Task("Symptom Check", task.getName(), LocalDate.now().toString(), time.toString()));
+            todayTasksShow.add(new com.example.app.classesAna.Task("Symptom Check", treatmentName, LocalDate.now().toString(), time.toString()));
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleMeasurementTask(Map<LocalTime, Task> dailyTasks) {
+    private void handleMeasurementTask(Map<LocalTime, Task> dailyTasks, String treatmentName) {
 
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
             TaskMeasurement task = (TaskMeasurement) dailyTasks.get(time);
-            todayTasksShow.add(new com.example.app.classesAna.Task("Measurement", task.getName(), LocalDate.now().toString(), time.toString()));
+            todayTasksShow.add(new com.example.app.classesAna.Task("Measurement", treatmentName, LocalDate.now().toString(), time.toString()));
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleActivityTask(Map<LocalTime, Task> dailyTasks) {
+    private void handleActivityTask(Map<LocalTime, Task> dailyTasks, String treatmentName) {
 
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
             TaskActivity task = (TaskActivity) dailyTasks.get(time);
-            todayTasksShow.add(new com.example.app.classesAna.Task("Activity", task.getName(), LocalDate.now().toString(), time.toString()));
+            todayTasksShow.add(new com.example.app.classesAna.Task("Activity", treatmentName, LocalDate.now().toString(), time.toString()));
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleMedicationTask(Map<LocalTime, Task> dailyTasks) {
+    private void handleMedicationTask(Map<LocalTime, Task> dailyTasks, String treatmentName) {
 
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
             TaskMedication task = (TaskMedication) dailyTasks.get(time);
-            todayTasksShow.add(new MedicationTask("Medication", task.getName(), LocalDate.now().toString(), time.toString(), task.getName(), task.getDose()));
+            todayTasksShow.add(new MedicationTask("Medication",treatmentName, LocalDate.now().toString(), time.toString(), task.getPillName(), task.getDose()));
         }
     }
 }
