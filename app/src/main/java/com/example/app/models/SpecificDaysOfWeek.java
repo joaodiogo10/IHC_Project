@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static java.time.format.TextStyle.FULL;
+import static java.time.format.TextStyle.SHORT;
 
 public class SpecificDaysOfWeek extends Frequency{
     private List<DayOfWeek> daysOfWeek;
@@ -41,7 +42,8 @@ public class SpecificDaysOfWeek extends Frequency{
         String str = "";
         for (DayOfWeek day:
              daysOfWeek) {
-                str = str.concat(day.getDisplayName(FULL, Locale.UK));
+                str = str.concat(day.getDisplayName(SHORT, Locale.UK));
+                str = str + " ";
         }
         return str;
     }
