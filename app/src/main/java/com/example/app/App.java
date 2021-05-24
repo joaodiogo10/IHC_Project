@@ -77,14 +77,12 @@ public class App extends Application {
         LocalTime secondTime = LocalTime.of(22, 15);
 
 
-
         dailyTasks.put(fistTime, new TaskMeasurement(fistTime,"Heart Rate"));
         dailyTasks.put(secondTime, new TaskMeasurement(secondTime,"Heart Rate"));
 
 
-
         LocalDate endDate = LocalDate.of(2021, 5, 24);
-        Treatment<TaskMeasurement> treatment = new Treatment<TaskMeasurement>("pica", frq, "notes", startDate, endDate, dailyTasks, TaskMeasurement.class);
+        Treatment<TaskMeasurement> treatment = new Treatment<TaskMeasurement>("Heart Rate", frq, "notes", startDate, endDate, dailyTasks, TaskMeasurement.class);
 
         App.listTreatment.add(treatment);
     }
@@ -120,19 +118,18 @@ public class App extends Application {
         List<LocalTime> tasksHours = Frequency.getHoursWithinTime(startTime, endTime, interval);
         for (LocalTime hour :
                 tasksHours) {
-            TaskMedication task = new TaskMedication(hour, 2, "ben u ron");
+            TaskMedication task = new TaskMedication(hour, 2, "Xarope");
             dailyTasks.put(hour, task);
         }
 
         LocalDate startDate = LocalDate.of(2021, 5, 1);
         LocalDate endDate = LocalDate.of(2021, 5, 24);
-        Treatment<TaskMedication> treatment = new Treatment<TaskMedication>("Xarope", frq, "notes", startDate, endDate, dailyTasks, TaskMedication.class);
+        Treatment<TaskMedication> treatment = new Treatment<TaskMedication>("Tomar Xarope",frq, "notes", startDate, endDate, dailyTasks, TaskMedication.class);
         //Log.d("Test", treatment.toString());
 
-        TaskMedication medTask = treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 2)).get(LocalTime.of(8, 30));
-        medTask.setState(Task.State.DONE);
-        Log.d("Test", "2021/5/2 :" + treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 2)).toString());
-        Log.d("Test", "2021/5/3 :" + treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 3)).toString());
+        //TaskMedication medTask = treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 2)).get(LocalTime.of(12, 30));
+        //medTask.setState(Task.State.DONE);
+        //Log.d("Test", treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 2)).toString());
         App.listTreatment.add(treatment);
     }
 }
