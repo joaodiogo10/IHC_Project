@@ -161,12 +161,12 @@ public class FrequencySpecificDaysWeek extends Fragment {
         for (int i = 0; i < picker.size(); i++) {
             LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
             int dose = picker.get(i).getDose();
-            TaskMedication task = new TaskMedication(hour, dose, name);
+            TaskMedication task = new TaskMedication(hour, dose, pill);
             dailyTasks.put(hour, task);
         }
 
         LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
-        com.example.app.models.Treatment<TaskMedication> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskMedication.class);
+        com.example.app.models.Treatment<TaskMedication> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskMedication.class);
 
         App.listTreatment.add(treatment);
     }
@@ -189,7 +189,7 @@ public class FrequencySpecificDaysWeek extends Fragment {
         }
 
         LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
-        com.example.app.models.Treatment<TaskMeasurement> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskMeasurement.class);
+        com.example.app.models.Treatment<TaskMeasurement> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskMeasurement.class);
 
         App.listTreatment.add(treatment);
     }
@@ -207,12 +207,12 @@ public class FrequencySpecificDaysWeek extends Fragment {
 
         for (int i = 0; i < picker.size(); i++) {
             LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
-            TaskSymptomCheck task = new TaskSymptomCheck(hour, name);
+            TaskSymptomCheck task = new TaskSymptomCheck(hour);
             dailyTasks.put(hour, task);
         }
 
         LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
-        com.example.app.models.Treatment<TaskSymptomCheck> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskSymptomCheck.class);
+        com.example.app.models.Treatment<TaskSymptomCheck> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskSymptomCheck.class);
 
         App.listTreatment.add(treatment);
     }
@@ -230,12 +230,12 @@ public class FrequencySpecificDaysWeek extends Fragment {
 
         for (int i = 0; i < picker.size(); i++) {
             LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
-            TaskActivity task = new TaskActivity(hour, name);
+            TaskActivity task = new TaskActivity(hour);
             dailyTasks.put(hour, task);
         }
 
         LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
-        com.example.app.models.Treatment<TaskActivity> treatment = new Treatment<>(frq, notes, startDate, endDate, dailyTasks, TaskActivity.class);
+        com.example.app.models.Treatment<TaskActivity> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskActivity.class);
 
         App.listTreatment.add(treatment);
     }

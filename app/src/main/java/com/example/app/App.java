@@ -55,12 +55,12 @@ public class App extends Application {
         LocalTime secondTime = LocalTime.of(22, 15);
 
 
-        dailyTasks.put(fistTime, new TaskSymptomCheck(fistTime, "SymptomCheck"));
-        dailyTasks.put(secondTime, new TaskSymptomCheck(secondTime, "SymptomCheck"));
+        dailyTasks.put(fistTime, new TaskSymptomCheck(fistTime));
+        dailyTasks.put(secondTime, new TaskSymptomCheck(secondTime));
 
         LocalDate startDate = LocalDate.of(2021, 5, 1);
         LocalDate endDate = LocalDate.of(2021, 5, 24);
-        Treatment<TaskSymptomCheck> treatment = new Treatment<TaskSymptomCheck>(frq, "notes", startDate, endDate, dailyTasks, TaskSymptomCheck.class);
+        Treatment<TaskSymptomCheck> treatment = new Treatment<TaskSymptomCheck>("SymptomCheck", frq, "notes", startDate, endDate, dailyTasks, TaskSymptomCheck.class);
 
         App.listTreatment.add(treatment);
     }
@@ -82,7 +82,7 @@ public class App extends Application {
 
 
         LocalDate endDate = LocalDate.of(2021, 5, 24);
-        Treatment<TaskMeasurement> treatment = new Treatment<TaskMeasurement>(frq, "notes", startDate, endDate, dailyTasks, TaskMeasurement.class);
+        Treatment<TaskMeasurement> treatment = new Treatment<TaskMeasurement>("Heart Rate", frq, "notes", startDate, endDate, dailyTasks, TaskMeasurement.class);
 
         App.listTreatment.add(treatment);
     }
@@ -96,13 +96,13 @@ public class App extends Application {
         LocalTime secondTime = LocalTime.of(20, 30);
 
 
-        dailyTasks.put(fistTime, new TaskActivity(fistTime, ">,<"));
-        dailyTasks.put(secondTime, new TaskActivity(secondTime, ">,<"));
+        dailyTasks.put(fistTime, new TaskActivity(fistTime));
+        dailyTasks.put(secondTime, new TaskActivity(secondTime));
 
 
         LocalDate startDate = LocalDate.of(2021, 5, 1);
         LocalDate endDate = LocalDate.of(2021, 5, 24);
-        Treatment<TaskActivity> treatment = new Treatment<TaskActivity>(frq, "notes", startDate, endDate, dailyTasks, TaskActivity.class);
+        Treatment<TaskActivity> treatment = new Treatment<TaskActivity>(">,<", frq, "notes", startDate, endDate, dailyTasks, TaskActivity.class);
 
         App.listTreatment.add(treatment);
     }
@@ -124,7 +124,7 @@ public class App extends Application {
 
         LocalDate startDate = LocalDate.of(2021, 5, 1);
         LocalDate endDate = LocalDate.of(2021, 5, 24);
-        Treatment<TaskMedication> treatment = new Treatment<TaskMedication>(frq, "notes", startDate, endDate, dailyTasks, TaskMedication.class);
+        Treatment<TaskMedication> treatment = new Treatment<TaskMedication>("Tomar Xarope",frq, "notes", startDate, endDate, dailyTasks, TaskMedication.class);
         //Log.d("Test", treatment.toString());
 
         //TaskMedication medTask = treatment.getDailyTaskByDate(LocalDate.of(2021, 5, 2)).get(LocalTime.of(12, 30));
