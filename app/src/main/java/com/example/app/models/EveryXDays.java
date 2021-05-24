@@ -36,6 +36,6 @@ public class EveryXDays extends Frequency{
 
     @Override
     public String toString() {
-        return "Every " + dayInterval + "days";
+        return "Every " + dayInterval + " days";
     }
 }

@@ -71,7 +71,7 @@ public class ScheduleLists extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setListDayRecycler() {
-        Map<LocalDate, ArrayList<Task>> map = new TreeMap<LocalDate, ArrayList<Task>>();
+        Map<LocalDate, ArrayList<Task>> map = new TreeMap<>();
         Map<LocalDate, ArrayList<Task>> dailyTasks = Collections.synchronizedMap(map);
 
         List<Treatment> treatments = App.listTreatment;
@@ -125,7 +125,7 @@ public class ScheduleLists extends Fragment {
                     tasks.get(date).keySet()) {
 
                 TaskSymptomCheck task = tasks.get(date).get(time);
-                dailyTasks.get(date).add(new Task("Symptom Check",task.getName(), date.toString(), time.toString()));
+                dailyTasks.get(date).add(new Task("Symptom Check",treatment.getName(), date.toString(), time.toString()));
             }
         }
     }
@@ -148,7 +148,7 @@ public class ScheduleLists extends Fragment {
                     tasks.get(date).keySet()) {
 
                 TaskMeasurement task = tasks.get(date).get(time);
-                dailyTasks.get(date).add(new Task("Measurement",task.getName(), date.toString(), time.toString()));
+                dailyTasks.get(date).add(new Task("Measurement",treatment.getName(), date.toString(), time.toString()));
             }
         }
     }
@@ -171,7 +171,7 @@ public class ScheduleLists extends Fragment {
                     tasks.get(date).keySet()) {
 
                 TaskActivity task = tasks.get(date).get(time);
-                dailyTasks.get(date).add(new Task("Activity",task.getName(), date.toString(), time.toString()));
+                dailyTasks.get(date).add(new Task("Activity",treatment.getName(), date.toString(), time.toString()));
             }
         }
     }
@@ -194,7 +194,7 @@ public class ScheduleLists extends Fragment {
                     tasks.get(date).keySet()) {
 
                 TaskMedication task = tasks.get(date).get(time);
-                dailyTasks.get(date).add(new MedicationTask("Medication", task.getName(), date.toString(), time.toString(), task.getName() , task.getDose()));
+                dailyTasks.get(date).add(new MedicationTask("Medication", treatment.getName(), date.toString(), time.toString(), task.getPillName() , task.getDose()));
             }
         }
     }
