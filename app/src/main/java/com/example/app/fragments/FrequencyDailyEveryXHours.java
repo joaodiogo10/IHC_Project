@@ -88,8 +88,8 @@ public class FrequencyDailyEveryXHours extends Fragment {
                     String pill = activity.getPill();
                     name = activity.getTaskName();
                     notes = activity.getNotes();
-                    duration = Integer.parseInt(activity.getDuration()); //TODO supor que a duraçao é em dias
-                    createMedicationTreatment(name, pill, notes, duration);
+                    //duration = Integer.parseInt(activity.getDuration()); //TODO supor que a duraçao é em dias
+                    createMedicationTreatment(name, pill, notes, 5);
                 } else if (getActivity().getClass().equals(AddMeasurementActivity.class)) {
                     //TODO pq é que o form n tem duraçao !?
                     AddMeasurementActivity activity = (AddMeasurementActivity) getActivity();

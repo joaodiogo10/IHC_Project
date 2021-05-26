@@ -52,6 +52,9 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinnerFrequency.setAdapter(adapter);
+        //TODO Para retirar a duraçao
+        findViewById(R.id.editTextDuration).setVisibility(View.GONE);
+        findViewById(R.id.textViewDuration).setVisibility(View.GONE);
 
         spinnerFrequency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -159,7 +162,7 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
     public void setValues() {
         taskName = ((EditText) findViewById(R.id.editTextTaskName)).getText().toString();
         pill = ((EditText) findViewById(R.id.editTextPill)).getText().toString();
-        duration = ((EditText) findViewById(R.id.editTextDuration)).getText().toString();
+        //duration = ((EditText) findViewById(R.id.editTextDuration)).getText().toString();
         notes = ((EditText) findViewById(R.id.editTextNotes)).getText().toString();
     }
 

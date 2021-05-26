@@ -70,9 +70,9 @@ public class FrequencyEveryXDays extends Fragment {
                     String pill = activity.getPill();
                     name = activity.getTaskName();
                     notes = activity.getNotes();
-                    duration = Integer.parseInt(activity.getDuration()); //TODO supor que a duraçao é em dias
+                    //duration = Integer.parseInt(activity.getDuration()); //TODO supor que a duraçao é em dias
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
-                    createMedicationTreatment(name, pill, notes, duration, picker);
+                    createMedicationTreatment(name, pill, notes, 5, picker);
                 } else if (getActivity().getClass().equals(AddMeasurementActivity.class)) {
                     //TODO pq é que o form n tem duraçao !?
                     AddMeasurementActivity activity = (AddMeasurementActivity) getActivity();
