@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.app.App;
@@ -42,12 +43,36 @@ import java.util.TreeMap;
 public class FrequencyDailyEveryXHours extends Fragment {
 
     private View view;
+    private int clickedHour;
+    private EditText first, last;
 
     @Nullable
     @Override
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_frequency_daily_every_x_hours, container, false);
+
+        first = (EditText) view.findViewById(R.id.editTextFirstIntake);
+
+        first.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedHour = 1;
+                TimePickerFragment pickerFragment = new TimePickerFragment();
+                pickerFragment.show(((AppCompatActivity) getContext()).getSupportFragmentManager(), "Time Picker");
+            }
+        });
+
+        last = (EditText) view.findViewById(R.id.editTextLastIntake);
+
+        last.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedHour = 2;
+                TimePickerFragment pickerFragment = new TimePickerFragment();
+                pickerFragment.show(((AppCompatActivity) getContext()).getSupportFragmentManager(), "Time Picker");
+            }
+        });
 
         Button btnSave = view.findViewById(R.id.buttonCheck);
 
@@ -94,6 +119,18 @@ public class FrequencyDailyEveryXHours extends Fragment {
             }
         });
         return view;
+    }
+
+    public int getClickedHour() {
+        return clickedHour;
+    }
+
+    public EditText getFirst() {
+        return first;
+    }
+
+    public EditText getLast() {
+        return last;
     }
 
     @Override

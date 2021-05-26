@@ -34,6 +34,7 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
     private FrequencySpecificDaysWeek frequencySpecificDaysWeek;
     private FrequencyXTimesADay frequencyXTimesADay;
     private FrequencyEveryXDays frequencyEveryXDays;
+    private FrequencyDailyEveryXHours frequencyDailyEveryXHours;
     private int selectedCardView;
     private String taskName, pill, duration, notes;
 
@@ -61,13 +62,13 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
                 switch (selectItemText) {
                     case "Daily X times a day":
                         frequencyXTimesADay = new FrequencyXTimesADay(true);
-
+                        selectedCardView = 0;
                         FragmentTransaction transactionXTimesADay = getSupportFragmentManager().beginTransaction();
                         transactionXTimesADay.replace(R.id.frequencyFragmentContainer, frequencyXTimesADay).commit();
                         break;
                     case "Daily every X hours":
-                        FrequencyDailyEveryXHours frequencyDailyEveryXHours = new FrequencyDailyEveryXHours();
-
+                        frequencyDailyEveryXHours = new FrequencyDailyEveryXHours();
+                        selectedCardView = 3;
                         FragmentTransaction transactionDailyEveryXHours = getSupportFragmentManager().beginTransaction();
                         transactionDailyEveryXHours.replace(R.id.frequencyFragmentContainer, frequencyDailyEveryXHours).commit();
                         break;
@@ -99,10 +100,13 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        CardView cardView;
-        AddMedicationRecViewAdapter recAdapter;
-        ArrayList<Picker> picker;
-        int position;
+        //Values just for initialization
+        CardView cardView = new CardView(getBaseContext());
+        AddMedicationRecViewAdapter recAdapter = new AddMedicationRecViewAdapter(getBaseContext());
+        ArrayList<Picker> picker = new ArrayList<>();
+        int position = 0;
+        int clickedHour = 0;
+
         switch (selectedCardView) {
             case 1:
                 cardView = (CardView) frequencyEveryXDays.getFrequencyXTimesADay().getPickerRecView().findViewWithTag(frequencyEveryXDays.getFrequencyXTimesADay().getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
@@ -116,20 +120,33 @@ public class AddMedicationActivity extends AppCompatActivity implements TimePick
                 position = recAdapter.currentPosition;
                 picker = recAdapter.getPicker();
                 break;
-            default:
+            case 0:
                 cardView = (CardView) frequencyXTimesADay.getPickerRecView().findViewWithTag(frequencyXTimesADay.getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
                 recAdapter = frequencyXTimesADay.getAddMedicationRecViewAdapter();
                 position = recAdapter.currentPosition;
                 picker = recAdapter.getPicker();
                 break;
+            case 3:
+                clickedHour = frequencyDailyEveryXHours.getClickedHour();
+                break;
+            default:
+                break;
         }
 
-        EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
-        editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+        if (clickedHour == 1) {
+            frequencyDailyEveryXHours.getFirst().setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+        }
+        else if (clickedHour == 2 ){
+            frequencyDailyEveryXHours.getLast().setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+        }
+        else {
+            EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
+            editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
 
-        picker.get(position).setHour(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+            picker.get(position).setHour(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
 
-        recAdapter.setHoursDose(picker);
+            recAdapter.setHoursDose(picker);
+        }
     }
 
     public void setValues() {
