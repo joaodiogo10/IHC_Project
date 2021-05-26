@@ -1,5 +1,14 @@
 package com.example.app.classesAna;
 
+/*
+day format: YYYY-MM-DD
+hour format: HH-MM
+Types:
+    "Medication"
+    "Measurement"
+    "Activity"
+    "Symptom Check"
+ */
 public class Task {
 
     //notes missing
@@ -7,13 +16,16 @@ public class Task {
     private String name;
     private String day;
     private String hour;
+    //index of treatment in treatment list app.listTreatment
+    private int treatmentIdx;
     private int image;      //to save drawable image
 
-    public Task(String type, String name, String day, String hour) {
+    public Task(String type, String name, String day, String hour, int treatmentIdx) {
         this.type = type;
         this.name = name;
         this.hour = hour;
         this.day = day;
+        this.treatmentIdx = treatmentIdx;
     }
 
     public String getType() {
@@ -51,6 +63,10 @@ public class Task {
     public String getDay() { return day; }
 
     public void setDay(String day) { this.day = day; }
+
+    public int getTreatmentIdx() {
+        return treatmentIdx;
+    }
 
     @Override
     public String toString() {

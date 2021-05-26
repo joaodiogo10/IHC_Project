@@ -159,7 +159,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/white"
             app:backgroundTint="@color/white"
-            android:stateListAnimator="@null"/>
+            android:stateListAnimator="@null" />
 
         <Button
             android:id="@+id/buttonCheck"
