@@ -73,7 +73,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                showDialog(tasks.get(position));
+                showDialog(tasks.get(position), position);
             }
         });
     }
@@ -105,7 +105,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
 
     //TODO:Notes missing
     @RequiresApi(api = Build.VERSION_CODES.O)
-    void showDialog(Task task) {
+    void showDialog(Task task, int position) {
 
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -167,6 +167,9 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
 
             App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time).setState(com.example.app.models.Task.State.DONE);
             dialog.dismiss();
+
+            tasks.remove(position);
+            setTasks(tasks);
         });
     }
 }

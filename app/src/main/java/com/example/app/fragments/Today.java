@@ -100,8 +100,10 @@ public class Today extends Fragment {
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
-            TaskSymptomCheck task = (TaskSymptomCheck) dailyTasks.get(time);
-            todayTasksShow.add(new com.example.app.classesAna.Task("Symptom Check", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
+            if(dailyTasks.get(time).getState() == Task.State.PENDING) {
+                TaskSymptomCheck task = (TaskSymptomCheck) dailyTasks.get(time);
+                todayTasksShow.add(new com.example.app.classesAna.Task("Symptom Check", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
+            }
         }
     }
 
@@ -111,8 +113,10 @@ public class Today extends Fragment {
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
-            TaskMeasurement task = (TaskMeasurement) dailyTasks.get(time);
-            todayTasksShow.add(new com.example.app.classesAna.Task("Measurement", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
+            if(dailyTasks.get(time).getState() == Task.State.PENDING) {
+                TaskMeasurement task = (TaskMeasurement) dailyTasks.get(time);
+                todayTasksShow.add(new com.example.app.classesAna.Task("Measurement", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
+            }
         }
     }
 
@@ -121,9 +125,10 @@ public class Today extends Fragment {
 
         for (LocalTime time :
                 dailyTasks.keySet()) {
-
-            TaskActivity task = (TaskActivity) dailyTasks.get(time);
-            todayTasksShow.add(new com.example.app.classesAna.Task("Activity", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
+            if(dailyTasks.get(time).getState() == Task.State.PENDING) {
+                TaskActivity task = (TaskActivity) dailyTasks.get(time);
+                todayTasksShow.add(new com.example.app.classesAna.Task("Activity", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
+            }
         }
     }
 
@@ -133,8 +138,10 @@ public class Today extends Fragment {
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
-            TaskMedication task = (TaskMedication) dailyTasks.get(time);
-            todayTasksShow.add(new MedicationTask("Medication",treatmentName, LocalDate.now().toString(), time.toString(), task.getPillName(), task.getDose(), treatmentIdx));
+            if(dailyTasks.get(time).getState() == Task.State.PENDING) {
+                TaskMedication task = (TaskMedication) dailyTasks.get(time);
+                todayTasksShow.add(new MedicationTask("Medication", treatmentName, LocalDate.now().toString(), time.toString(), task.getPillName(), task.getDose(), treatmentIdx));
+            }
         }
     }
 }
