@@ -2,6 +2,8 @@ package com.example.app.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +15,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app.App;
 import com.example.app.R;
 import com.example.app.classesAna.MedicationTask;
 import com.example.app.classesAna.Task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapter.ViewHolder> {
@@ -64,6 +70,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 showDialog(tasks.get(position));
@@ -97,6 +104,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
     }
 
     //TODO:Notes missing
+    @RequiresApi(api = Build.VERSION_CODES.O)
     void showDialog(Task task) {
 
         Dialog dialog = new Dialog(context);
@@ -146,8 +154,18 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         dialog.show();
 
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
+        Button buttonCheck = dialog.findViewById(R.id.buttonCheck);
 
         buttonCancel.setOnClickListener( (v) -> {
+            dialog.dismiss();
+        });
+
+        buttonCheck.setOnClickListener( (v) -> {
+            LocalDate date =  LocalDate.parse( (CharSequence) task.getDay());
+            LocalTime time = LocalTime.parse( (CharSequence) task.getHour());
+            int treatmentIdx = task.getTreatmentIdx();
+
+            App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time).setState(com.example.app.models.Task.State.DONE);
             dialog.dismiss();
         });
     }

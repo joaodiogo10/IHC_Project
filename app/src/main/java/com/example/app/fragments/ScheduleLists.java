@@ -76,9 +76,8 @@ public class ScheduleLists extends Fragment {
 
         List<Treatment> treatments = App.listTreatment;
 
-        for (Treatment treatment:
-                treatments) {
-            treatmentHandlerPicker(treatment, dailyTasks);
+        for(int i = 0; i < treatments.size(); i++) {
+            treatmentHandlerPicker(treatments.get(i), dailyTasks, i);
         }
 
         ArrayList<LocalDate> dates = new ArrayList(Arrays.asList(dailyTasks.keySet().toArray()));
@@ -92,23 +91,19 @@ public class ScheduleLists extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void treatmentHandlerPicker(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks) {
-        if(treatment.getType().equals(TaskMedication.class)) {
-            handleMedicationTask(treatment, dailyTasks);
-        }
-        else if(treatment.getType().equals(TaskActivity.class)) {
-            handleActivityTask(treatment, dailyTasks);
-        }
-        else if(treatment.getType().equals(TaskMeasurement.class)) {
-            handleMeasurementTask(treatment, dailyTasks);
-        }
-        else {
-            handleSymptomCheckTask(treatment, dailyTasks);
+    private void treatmentHandlerPicker(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks, int treatmentIdx) {
+        if (treatment.getType().equals(TaskMedication.class)) {
+            handleMedicationTask(treatment, dailyTasks, treatmentIdx);
+        } else if (treatment.getType().equals(TaskActivity.class)) {
+            handleActivityTask(treatment, dailyTasks, treatmentIdx);
+        } else if (treatment.getType().equals(TaskMeasurement.class)) {
+            handleMeasurementTask(treatment, dailyTasks, treatmentIdx);
+        } else {
+            handleSymptomCheckTask(treatment, dailyTasks, treatmentIdx);
         }
     }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleSymptomCheckTask(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks) {
+    private void handleSymptomCheckTask(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks, int treatmentIdx) {
         LocalDate today = LocalDate.now();
 
         Map<LocalDate, Map<LocalTime, TaskSymptomCheck>> tasks = treatment.getTasks();
@@ -125,13 +120,13 @@ public class ScheduleLists extends Fragment {
                     tasks.get(date).keySet()) {
 
                 TaskSymptomCheck task = tasks.get(date).get(time);
-                dailyTasks.get(date).add(new Task("Symptom Check",treatment.getName(), date.toString(), time.toString()));
+                dailyTasks.get(date).add(new Task("Symptom Check",treatment.getName(), date.toString(), time.toString(), treatmentIdx));
             }
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleMeasurementTask(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks) {
+    private void handleMeasurementTask(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks, int treatmentIdx) {
         LocalDate today = LocalDate.now();
 
         Map<LocalDate, Map<LocalTime, TaskMeasurement>> tasks = treatment.getTasks();
@@ -148,13 +143,13 @@ public class ScheduleLists extends Fragment {
                     tasks.get(date).keySet()) {
 
                 TaskMeasurement task = tasks.get(date).get(time);
-                dailyTasks.get(date).add(new Task("Measurement",treatment.getName(), date.toString(), time.toString()));
+                dailyTasks.get(date).add(new Task("Measurement",treatment.getName(), date.toString(), time.toString(), treatmentIdx));
             }
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleActivityTask(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks) {
+    private void handleActivityTask(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks, int treatmentIdx) {
         LocalDate today = LocalDate.now();
 
         Map<LocalDate, Map<LocalTime, TaskActivity>> tasks = treatment.getTasks();
@@ -171,13 +166,13 @@ public class ScheduleLists extends Fragment {
                     tasks.get(date).keySet()) {
 
                 TaskActivity task = tasks.get(date).get(time);
-                dailyTasks.get(date).add(new Task("Activity",treatment.getName(), date.toString(), time.toString()));
+                dailyTasks.get(date).add(new Task("Activity",treatment.getName(), date.toString(), time.toString(), treatmentIdx));
             }
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleMedicationTask(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks) {
+    private void handleMedicationTask(Treatment treatment, Map<LocalDate, ArrayList<Task>> dailyTasks, int treatmentIdx) {
         LocalDate today = LocalDate.now();
 
         Map<LocalDate, Map<LocalTime, TaskMedication>> tasks = treatment.getTasks();
@@ -194,7 +189,7 @@ public class ScheduleLists extends Fragment {
                     tasks.get(date).keySet()) {
 
                 TaskMedication task = tasks.get(date).get(time);
-                dailyTasks.get(date).add(new MedicationTask("Medication", treatment.getName(), date.toString(), time.toString(), task.getPillName() , task.getDose()));
+                dailyTasks.get(date).add(new MedicationTask("Medication", treatment.getName(), date.toString(), time.toString(), task.getPillName() , task.getDose(), treatmentIdx));
             }
         }
     }
