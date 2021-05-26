@@ -34,7 +34,7 @@ public class AddSymptomCheckActivity extends AppCompatActivity implements TimePi
     private FrequencyEveryXDays frequencyEveryXDays;
     private FrequencyDailyEveryXHours frequencyDailyEveryXHours;
     private int selectedCardView;
-    private String symptonName;
+    private String symptomName;
     private String notes;
 
     @Override
@@ -57,27 +57,25 @@ public class AddSymptomCheckActivity extends AppCompatActivity implements TimePi
                 switch (selectItemText) {
                     case "Daily X times a day":
                         frequencyXTimesADay = new FrequencyXTimesADay(true);
-
+                        selectedCardView = 0;
                         FragmentTransaction transactionXTimesADay = getSupportFragmentManager().beginTransaction();
                         transactionXTimesADay.replace(R.id.frequencyFragmentContainer, frequencyXTimesADay).commit();
                         break;
                     case "Daily every X hours":
                         frequencyDailyEveryXHours = new FrequencyDailyEveryXHours();
+                        selectedCardView = 3;
                         FragmentTransaction transactionDailyEveryXHours = getSupportFragmentManager().beginTransaction();
                         transactionDailyEveryXHours.replace(R.id.frequencyFragmentContainer, frequencyDailyEveryXHours).commit();
-
                         break;
                     case "Every X days":
                         frequencyEveryXDays = new FrequencyEveryXDays();
                         selectedCardView = 1;
-
                         FragmentTransaction transactionEveryXDays = getSupportFragmentManager().beginTransaction();
                         transactionEveryXDays.replace(R.id.frequencyFragmentContainer, frequencyEveryXDays).commit();
                         break;
                     case "Specific days of the week":
                         frequencySpecificDaysWeek = new FrequencySpecificDaysWeek();
                         selectedCardView = 2;
-
                         FragmentTransaction transactionSpecificDaysWeek = getSupportFragmentManager().beginTransaction();
                         transactionSpecificDaysWeek.replace(R.id.frequencyFragmentContainer, frequencySpecificDaysWeek).commit();
                         break;
@@ -95,10 +93,13 @@ public class AddSymptomCheckActivity extends AppCompatActivity implements TimePi
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        CardView cardView;
-        AddMedicationRecViewAdapter recAdapter;
-        ArrayList<Picker> picker;
-        int position;
+        //Values just for initialization
+        CardView cardView = new CardView(getBaseContext());
+        AddMedicationRecViewAdapter recAdapter = new AddMedicationRecViewAdapter(getBaseContext());
+        ArrayList<Picker> picker = new ArrayList<>();
+        int position = 0;
+        int clickedHour = 0;
+
         switch (selectedCardView) {
             case 1:
                 cardView = (CardView) frequencyEveryXDays.getFrequencyXTimesADay().getPickerRecView().findViewWithTag(frequencyEveryXDays.getFrequencyXTimesADay().getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
@@ -112,29 +113,42 @@ public class AddSymptomCheckActivity extends AppCompatActivity implements TimePi
                 position = recAdapter.currentPosition;
                 picker = recAdapter.getPicker();
                 break;
-            default:
+            case 0:
                 cardView = (CardView) frequencyXTimesADay.getPickerRecView().findViewWithTag(frequencyXTimesADay.getAddMedicationRecViewAdapter().getCardViewSelectedPosition());
                 recAdapter = frequencyXTimesADay.getAddMedicationRecViewAdapter();
                 position = recAdapter.currentPosition;
                 picker = recAdapter.getPicker();
                 break;
+            case 3:
+                clickedHour = frequencyDailyEveryXHours.getClickedHour();
+                break;
+            default:
+                break;
         }
 
-        EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
-        editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+        if (clickedHour == 1) {
+            frequencyDailyEveryXHours.getFirst().setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+        }
+        else if (clickedHour == 2 ){
+            frequencyDailyEveryXHours.getLast().setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+        }
+        else {
+            EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
+            editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
 
-        picker.get(position).setHour(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+            picker.get(position).setHour(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
 
-        recAdapter.setHoursDose(picker);
+            recAdapter.setHoursDose(picker);
+        }
     }
 
     public void setValues() {
-        symptonName = ((EditText) findViewById(R.id.editTextTaskName)).getText().toString();
+        symptomName = ((EditText) findViewById(R.id.editTextTaskName)).getText().toString();
         notes = ((EditText) findViewById(R.id.editTextNotes)).getText().toString();
     }
 
     public String getSymptomName() {
-        return symptonName;
+        return symptomName;
     }
 
     public String getNotes() {
