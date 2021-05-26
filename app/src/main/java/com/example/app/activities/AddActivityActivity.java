@@ -95,6 +95,7 @@ public class AddActivityActivity extends AppCompatActivity implements TimePicker
         ArrayList<Picker> picker = new ArrayList<>();
         int position = 0;
         int clickedHour = 0;
+        String hour;
 
         switch (selectedCardView) {
             case 1:
@@ -122,20 +123,26 @@ public class AddActivityActivity extends AppCompatActivity implements TimePicker
                 break;
         }
 
+        hour = checkDigit(hourOfDay) + ":" + checkDigit(minute);
+
         if (clickedHour == 1) {
-            frequencyDailyEveryXHours.getFirst().setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+            frequencyDailyEveryXHours.getFirst().setText(hour);
         }
         else if (clickedHour == 2 ){
-            frequencyDailyEveryXHours.getLast().setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+            frequencyDailyEveryXHours.getLast().setText(hour);
         }
         else {
             EditText editHour = (EditText) cardView.findViewById(R.id.editHour);
-            editHour.setText(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+            editHour.setText(hour);
 
-            picker.get(position).setHour(String.valueOf(hourOfDay) + ":" + String.valueOf(minute));
+            picker.get(position).setHour(hour);
 
             recAdapter.setHoursDose(picker);
         }
+    }
+
+    public String checkDigit(int number) {
+        return number <= 9 ? "0" + number : String.valueOf(number);
     }
 
     public void setValues() {
