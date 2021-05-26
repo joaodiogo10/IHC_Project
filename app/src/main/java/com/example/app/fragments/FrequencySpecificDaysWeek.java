@@ -78,11 +78,11 @@ public class FrequencySpecificDaysWeek extends Fragment {
                     String pill = activity.getPill();
                     name = activity.getTaskName();
                     notes = activity.getNotes();
-                    duration = Integer.parseInt(activity.getDuration()); //TODO supor que a duraçao é em dias
+                    //duration = Integer.parseInt(activity.getDuration()); //TODO supor que a duraçao é em dias
                     List<MaterialDayPicker.Weekday> selectedDays = dayPicker.getSelectedDays();
                     ArrayList<DayOfWeek> daysOfWeek = getDaysOfWeek(selectedDays);
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
-                    createMedicationTreatment(name, pill, notes, duration, picker, daysOfWeek);
+                    createMedicationTreatment(name, pill, notes, 5, picker, daysOfWeek);
                 } else if (getActivity().getClass().equals(AddMeasurementActivity.class)) {
                     //TODO pq é que o form n tem duraçao !?
                     AddMeasurementActivity activity = (AddMeasurementActivity) getActivity();
