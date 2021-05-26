@@ -7,17 +7,6 @@
     android:background="@drawable/gradient"
     tools:context=".Register">
 
-    <TextView
-        android:id="@+id/textview_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
-
     <Button
         android:id="@+id/CreateAccButton_2"
         android:layout_width="wrap_content"
@@ -38,6 +27,7 @@
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
+        android:textColor="@color/white"
         android:textColorHint="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +43,7 @@
         android:ems="10"
         android:hint="e-mail"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
         android:textColorHint="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +58,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Last Name"
+        android:textColor="@color/white"
         android:inputType="textPersonName"
         android:textColorHint="@color/grey"
         app:layout_constraintBottom_toTopOf="@+id/etEMAIL_2"
@@ -82,6 +74,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="First Name"
+        android:textColor="@color/white"
         android:inputType="textPersonName"
         android:textColorHint="@color/grey"
         app:layout_constraintBottom_toTopOf="@+id/etEMAIL_2"
@@ -97,6 +90,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Birthday Date"
+        android:textColor="@color/white"
         android:textColorHint="@color/grey"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"

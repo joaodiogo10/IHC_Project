@@ -129,12 +129,10 @@ public class FrequencyXTimesADay extends Fragment {
                         notes = activity.getNotes();
                         createActivityTreatment(name, notes, 5);
                     }
-                    getActivity().finish();
                     Context context = getActivity().getApplicationContext();
                     Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
                     toast.show();
                     getActivity().finish();
-                    //TODO mudar de pagina
                 }
             });
 

@@ -49,4 +49,10 @@ public class Treatment extends Fragment {
                 v -> NavHostFragment.findNavController(this).navigate(R.id.action_treatmentFragment_to_treatmentBottomSheetFragment)
         );
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
 }

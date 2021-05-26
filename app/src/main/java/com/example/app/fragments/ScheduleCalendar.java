@@ -16,6 +16,7 @@ import android.widget.CalendarView;
 import com.example.app.R;
 
 import org.jetbrains.annotations.NotNull;
+import com.example.app.activities.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +46,7 @@ public class ScheduleCalendar extends Fragment {
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String date = dayOfMonth + "/" + month + "/" + year;
                 Log.d(TAG, "onSelectedDayChange: date: " + date);
+                //startActivity(new Intent(getActivity(), LoginActivity.class)); // mudar loginActivity por CalendarDaySelected
             }
         });
     }

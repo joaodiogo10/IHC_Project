@@ -97,12 +97,10 @@ public class FrequencyEveryXDays extends Fragment {
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
                     createActivityTreatment(name, notes, 5, picker);
                 }
-                getActivity().finish();
                 Context context = getActivity().getApplicationContext();
                 Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
                 toast.show();
-                //getActivity().finish();
-                //TODO falta sair daqui
+                getActivity().finish();
             }
         });
 
