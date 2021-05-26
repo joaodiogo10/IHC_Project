@@ -28,6 +28,7 @@ import com.example.app.models.Treatment;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -76,6 +77,7 @@ public class Today extends Fragment {
         }
 
         adapter = new TasksRecViewAdapter(view.getContext());
+        Collections.sort(todayTasksShow);
         adapter.setTasks(todayTasksShow);
         tasksRecView.setAdapter(adapter);
         tasksRecView.setLayoutManager(new LinearLayoutManager(view.getContext()));

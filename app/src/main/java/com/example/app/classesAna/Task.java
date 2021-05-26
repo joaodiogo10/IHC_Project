@@ -1,5 +1,12 @@
 package com.example.app.classesAna;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /*
 day format: YYYY-MM-DD
 hour format: HH-MM
@@ -9,7 +16,7 @@ Types:
     "Activity"
     "Symptom Check"
  */
-public class Task {
+public class Task implements Comparable<Task>{
 
     //notes missing
     private String type;
@@ -68,6 +75,7 @@ public class Task {
         return treatmentIdx;
     }
 
+
     @Override
     public String toString() {
         return "Task{" +
@@ -77,5 +85,11 @@ public class Task {
                 ", hour='" + hour + '\'' +
                 ", image=" + image +
                 '}';
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public int compareTo(Task o) {
+        return LocalDate.parse(this.day).atTime(LocalTime.parse(this.hour)).compareTo(LocalDate.parse(o.getDay()).atTime(LocalTime.parse(o.getHour())));
     }
 }

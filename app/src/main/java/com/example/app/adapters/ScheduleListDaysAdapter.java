@@ -20,6 +20,7 @@ import com.example.app.classesAna.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +52,7 @@ public class ScheduleListDaysAdapter extends RecyclerView.Adapter<ScheduleListDa
 
         //Initialize inner recycler
         TasksRecViewAdapter dailyAdapter = new TasksRecViewAdapter(context);
+        Collections.sort(dailyTasks.get(listDays.get(position)));
         dailyAdapter.setTasks(dailyTasks.get(listDays.get(position)));
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         holder.rvDailyTasks.setLayoutManager(layoutManager);
