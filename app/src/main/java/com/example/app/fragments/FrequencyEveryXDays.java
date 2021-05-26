@@ -101,7 +101,7 @@ public class FrequencyEveryXDays extends Fragment {
                 Context context = getActivity().getApplicationContext();
                 Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
                 toast.show();
-                getActivity().finish();
+                //getActivity().finish();
                 //TODO falta sair daqui
             }
         });

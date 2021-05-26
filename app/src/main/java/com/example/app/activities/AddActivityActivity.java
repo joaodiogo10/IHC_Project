@@ -146,7 +146,7 @@ public class AddActivityActivity extends AppCompatActivity implements TimePicker
     }
 
     public void setValues() {
-        activityName = ((EditText) findViewById(R.id.editTextTaskName)).getText().toString();
+        activityName = ((EditText) findViewById(R.id.editTextActivity)).getText().toString();
         notes = ((EditText) findViewById(R.id.editTextNotes)).getText().toString();
     }
 
