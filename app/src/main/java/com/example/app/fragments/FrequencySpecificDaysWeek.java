@@ -117,7 +117,6 @@ public class FrequencySpecificDaysWeek extends Fragment {
                 Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_LONG);
                 toast.show();
                 getActivity().finish();
-                //TODO falta sair daqui
             }
         });
 

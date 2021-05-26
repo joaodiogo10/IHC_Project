@@ -16,7 +16,6 @@ import android.widget.CalendarView;
 import com.example.app.R;
 
 import org.jetbrains.annotations.NotNull;
-import com.example.app.activities.CalendarDaySelected;
 import com.example.app.activities.LoginActivity;
 
 /**
