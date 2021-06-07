@@ -58,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
                 String date = makeDateString(dayOfMonth, month, year);
                 dateButton.setText(date);
             }
@@ -74,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private String makeDateString(int day, int month, int year){
-        return day + " - " + getMonthFormat(month) + " - " + year;
+        return getMonthFormat(month) + " - " + day + " - " + year;
     }
 
     private String getMonthFormat(int month){

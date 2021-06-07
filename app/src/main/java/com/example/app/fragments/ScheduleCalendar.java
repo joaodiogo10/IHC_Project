@@ -1,6 +1,5 @@
 package com.example.app.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,6 @@ import android.widget.CalendarView;
 import com.example.app.R;
 
 import org.jetbrains.annotations.NotNull;
-import com.example.app.activities.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
