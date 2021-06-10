@@ -6,11 +6,6 @@
     app:startDestination="@id/todayFragment">
 
     <fragment
-        android:id="@+id/scheduleFragment"
-        android:name="com.example.app.fragments.Schedule"
-        android:label="fragment_schedule"
-        tools:layout="@layout/fragment_schedule" />
-    <fragment
         android:id="@+id/treatmentFragment"
         android:name="com.example.app.fragments.Treatment"
         android:label="fragment_treatment"
@@ -29,4 +24,14 @@
         android:name="com.example.app.fragments.TreatmentBottomSheetFragment"
         android:label="treatment_bottom_sheet"
         tools:layout="@layout/fragment_treatment_bottom_sheet"/>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.app.fragments.Calendar"
+        android:label="fragment_schedule_calendar"
+        tools:layout="@layout/fragment_schedule_calendar" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.app.fragments.History"
+        android:label="fragment_schedule_lists"
+        tools:layout="@layout/fragment_schedule_lists" />
 </navigation>

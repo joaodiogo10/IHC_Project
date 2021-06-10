@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,9 +20,6 @@ import com.example.app.fragments.FrequencyDailyEveryXHours;
 import com.example.app.fragments.FrequencyEveryXDays;
 import com.example.app.fragments.FrequencySpecificDaysWeek;
 import com.example.app.fragments.FrequencyXTimesADay;
-import com.example.app.fragments.ScheduleCalendar;
-import com.example.app.fragments.ScheduleLists;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 

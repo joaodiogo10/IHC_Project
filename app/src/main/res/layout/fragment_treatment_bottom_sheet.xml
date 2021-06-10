@@ -9,7 +9,7 @@
     app:behavior_hideable="true"
     android:background="@android:color/white"
     tools:context=".fragments.TreatmentBottomSheetFragment">
-    >
+
 
     <LinearLayout
         android:id="@+id/bottomSheetMedication"
