@@ -6,7 +6,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +44,7 @@ public class Today extends Fragment {
 
     private View view;
     private RecyclerView tasksRecView;
+    private ConstraintLayout emptyTasks;
     private TasksRecViewAdapter adapter;
     private ArrayList<com.example.app.classesAna.Task> todayTasksShow = new ArrayList<>();
 
@@ -58,20 +62,37 @@ public class Today extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tasksRecView = view.findViewById(R.id.tasksTodayRecyclerView);
-        setTodayTasksRecycler();
+        emptyTasks = view.findViewById(R.id.todayEmptyTasks);
+        view.findViewById(R.id.floatingActionButton).setOnClickListener(
+                v -> NavHostFragment.findNavController(this).navigate(R.id.action_todayFragment_to_treatmentBottomSheetFragment)
+        );
 
         super.onViewCreated(view, savedInstanceState);
     }
+    
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onResume() {
+        super.onResume();
+        boolean empty = setTodayTasksRecycler();
+        if(empty)
+            emptyTasks.setVisibility(View.VISIBLE);
+        else
+            emptyTasks.setVisibility(View.GONE);
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void setTodayTasksRecycler() {
+    private boolean setTodayTasksRecycler() {
         Map<LocalTime, Task> todayTasks;
+        boolean empty = true;
 
         List<Treatment> treatments = App.listTreatment;
 
         for(int i = 0; i < treatments.size(); i++) {
             todayTasks = treatments.get(i).getDailyTaskByDate(LocalDate.now());
             if (todayTasks != null) {
+                empty = false;
                 treatmentHandlerPicker(treatments.get(i), todayTasks, i);
             }
         }
@@ -81,6 +102,8 @@ public class Today extends Fragment {
         adapter.setTasks(todayTasksShow);
         tasksRecView.setAdapter(adapter);
         tasksRecView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        return empty;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -140,7 +163,7 @@ public class Today extends Fragment {
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
-            if(dailyTasks.get(time).getState() == Task.State.PENDING) {
+            if (dailyTasks.get(time).getState() == Task.State.PENDING) {
                 TaskMedication task = (TaskMedication) dailyTasks.get(time);
                 todayTasksShow.add(new MedicationTask("Medication", treatmentName, LocalDate.now().toString(), time.toString(), task.getPillName(), task.getDose(), treatmentIdx));
             }

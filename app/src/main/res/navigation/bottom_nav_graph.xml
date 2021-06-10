@@ -18,7 +18,11 @@
         android:id="@+id/todayFragment"
         android:name="com.example.app.fragments.Today"
         android:label="fragment_today"
-        tools:layout="@layout/fragment_today" />
+        tools:layout="@layout/fragment_today" >
+        <action
+            android:id="@+id/action_todayFragment_to_treatmentBottomSheetFragment"
+            app:destination="@id/treatmentBottomSheetFragment" />
+    </fragment>
     <dialog
         android:id="@+id/treatmentBottomSheetFragment"
         android:name="com.example.app.fragments.TreatmentBottomSheetFragment"

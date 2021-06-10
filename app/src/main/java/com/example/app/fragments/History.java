@@ -50,6 +50,7 @@ public class History extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setTitle(R.string.nav_history);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_schedule_lists, container, false);
     }

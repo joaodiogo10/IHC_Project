@@ -56,5 +56,4 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         this.moveTaskToBack(true);
     }
-
 }

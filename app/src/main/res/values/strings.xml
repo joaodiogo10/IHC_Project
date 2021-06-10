@@ -23,4 +23,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="calendar">Calendar</string>
     <string name="history">History</string>
+    <string name="fba_add_treatment">Add treatment</string>
 </resources>

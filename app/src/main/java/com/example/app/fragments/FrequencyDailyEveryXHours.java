@@ -2,6 +2,7 @@ package com.example.app.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.example.app.activities.AddActivityActivity;
 import com.example.app.activities.AddMeasurementActivity;
 import com.example.app.activities.AddMedicationActivity;
 import com.example.app.activities.AddSymptomCheckActivity;
+import com.example.app.activities.MainActivity;
 import com.example.app.models.DailyEveryXHours;
 import com.example.app.models.Frequency;
 import com.example.app.models.TaskActivity;
