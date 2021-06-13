@@ -1,5 +1,6 @@
 package com.example.app.fragments;
 
+import android.app.usage.UsageEvents;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.widget.CalendarView;
 import com.example.app.R;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +47,9 @@ public class Calendar extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String date = dayOfMonth + "/" + month + "/" + year;
+                Date date1 = new Date(year-1900,month,dayOfMonth);
                 Log.d(TAG, "onSelectedDayChange: date: " + date);
+                System.out.println("onSelectedDayChange: date2: " + date1);
                 //startActivity(new Intent(getActivity(), LoginActivity.class)); // mudar loginActivity por CalendarDaySelected
             }
         });
