@@ -23,7 +23,7 @@ public class TaskMeasurement extends Task {
         setMeasurementTask(name);
     }
 
-    public void setMeasurement(int value) {
+    public void setMeasurementValue(int value) {
         assert (value >= 0);
         this.measurementValue = value;
     }

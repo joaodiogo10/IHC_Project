@@ -25,8 +25,9 @@
             android:id="@+id/txtHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="41dp"
+            android:layout_marginBottom="19dp"
             android:layout_toRightOf="@id/image"
             android:text="Hour"
             android:textSize="20sp"
@@ -37,11 +38,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="47dp"
             android:layout_marginTop="0dp"
             android:layout_toRightOf="@id/txtHour"
             android:text="Task Name"
             android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/imageStateGreen"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="14dp"
+            app:tint="@color/green"/>
+
+        <ImageView
+            android:id="@+id/imageStateRed"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="14dp"
+            app:tint="@color/red"/>
+
+        <ImageView
+            android:id="@+id/imageStateYellow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="14dp"
+            app:tint="@color/yellow"/>
 
     </RelativeLayout>
 

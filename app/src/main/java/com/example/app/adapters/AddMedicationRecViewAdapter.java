@@ -54,6 +54,7 @@ public class AddMedicationRecViewAdapter extends RecyclerView.Adapter<AddMedicat
             @Override
             public void onClick(View v) {
                 TimePickerFragment pickerFragment = new TimePickerFragment();
+
                 holder.cardView.setTag(position);
                 currentPosition = position;
                 setCardViewSelectedPosition(position);

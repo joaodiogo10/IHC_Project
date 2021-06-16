@@ -35,7 +35,7 @@ public class App extends Application {
         super.onCreate();
         listTreatment = new ArrayList<Treatment>();
         //Test master
-       // testCreateMedicationTreatment();
+       //testCreateMedicationTreatment();
        // testCreateActivityTreatment();
        // testCreateActivityMeasurement();
        // testCreateActivitySymptomCheck();

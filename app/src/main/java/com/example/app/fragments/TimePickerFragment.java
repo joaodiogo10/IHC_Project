@@ -20,6 +20,6 @@ public class TimePickerFragment extends DialogFragment {
 
         // Create a new instance of TimePickerDialog and return it
         return new TimePickerDialog(getActivity(), (TimePickerDialog.OnTimeSetListener) getActivity(), hour, minute,
-                DateFormat.is24HourFormat(getActivity()));
+                true);
     }
 }

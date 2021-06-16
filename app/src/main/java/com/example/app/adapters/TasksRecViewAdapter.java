@@ -1,7 +1,11 @@
 package com.example.app.adapters;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,20 +13,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.App;
 import com.example.app.R;
 import com.example.app.classesAna.MedicationTask;
 import com.example.app.classesAna.Task;
+import com.example.app.models.TaskMeasurement;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -45,10 +53,15 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         return holder;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onBindViewHolder(@NonNull TasksRecViewAdapter.ViewHolder holder, int position) {
         holder.txtTaskName.setText(tasks.get(position).getName());
         holder.txtHour.setText(tasks.get(position).getHour());
+        holder.stateImageGreen.setImageResource(R.drawable.ic_circulo_preto);
+        holder.stateImageRed.setImageResource(R.drawable.ic_circulo_preto);
+        holder.stateImageYellow.setImageResource(R.drawable.ic_circulo_preto);
 
         switch (tasks.get(position).getType()){
             case "Medication":
@@ -67,6 +80,32 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
                 tasks.get(position).setImage(R.drawable.ic_smile);
                 holder.image.setImageResource(R.drawable.ic_smile);
                 break;
+        }
+
+        int treatmentIdx = tasks.get(position).getTreatmentIdx();
+        LocalDate date =  LocalDate.parse( (CharSequence) tasks.get(position).getDay());
+        LocalTime time = LocalTime.parse( (CharSequence) tasks.get(position).getHour());
+
+        com.example.app.models.Task stateTask = App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time);
+        if (date.compareTo(LocalDate.now()) < 0) {
+            holder.stateImageRed.setVisibility(View.VISIBLE);
+            holder.stateImageGreen.setVisibility(View.GONE);
+            holder.stateImageYellow.setVisibility(View.GONE);
+        }
+        else if (time.compareTo(LocalTime.now()) < 0) {
+            holder.stateImageRed.setVisibility(View.VISIBLE);
+            holder.stateImageGreen.setVisibility(View.GONE);
+            holder.stateImageYellow.setVisibility(View.GONE);
+        }
+        else if (stateTask.getState() == com.example.app.models.Task.State.PENDING) {
+            holder.stateImageRed.setVisibility(View.GONE);
+            holder.stateImageGreen.setVisibility(View.GONE);
+            holder.stateImageYellow.setVisibility(View.VISIBLE);
+        }
+        else if (stateTask.getState() == com.example.app.models.Task.State.DONE) {
+            holder.stateImageRed.setVisibility(View.GONE);
+            holder.stateImageGreen.setVisibility(View.VISIBLE);
+            holder.stateImageYellow.setVisibility(View.GONE);
         }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +130,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtHour, txtTaskName;
-        private ImageView image;
+        private ImageView image, stateImageGreen, stateImageRed, stateImageYellow;
         private CardView parent;
 
         public ViewHolder(@NonNull View itemView) {
@@ -100,6 +139,9 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
             txtHour = itemView.findViewById(R.id.txtHour);
             parent = itemView.findViewById(R.id.parent);
             image = itemView.findViewById(R.id.image);
+            stateImageGreen = itemView.findViewById(R.id.imageStateGreen);
+            stateImageRed = itemView.findViewById(R.id.imageStateRed);
+            stateImageYellow = itemView.findViewById(R.id.imageStateYellow);
         }
     }
 
@@ -109,6 +151,11 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
 
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        Activity act = (Activity) context;
+        int treatmentIdx = task.getTreatmentIdx();
+        LocalDate date =  LocalDate.parse( (CharSequence) task.getDay());
+        LocalTime time = LocalTime.parse( (CharSequence) task.getHour());
 
         switch (task.getType()) {
             case "Medication":
@@ -135,6 +182,34 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
                 break;
             case "Measurement":
                 dialog.setContentView(R.layout.dialog_measurement);
+                TaskMeasurement mTask = (TaskMeasurement) App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time);
+                EditText measureValue = new EditText(context);
+                TextView units = dialog.findViewById(R.id.txtUnits);
+                switch (task.getName()) {
+                    case "Blood Pressure":
+                        units.setText("mmHg");
+                        break;
+                    case "Blood Glucose":
+                        units.setText("mg/dl");
+                        break;
+                    case "Weight":
+                        units.setText("kg");
+                        break;
+                    default:
+                        units.setText("bpm");
+                        break;
+                }
+                if ( mTask.getMeasurementValue() > 0 ) {
+                    measureValue = dialog.findViewById(R.id.editTxtValue);
+                    measureValue.setText(String.valueOf(mTask.getMeasurementValue()));
+                }
+
+                if (act.getTitle().equals("History")) {
+                    measureValue.setFocusable(false);
+                }
+                else {
+                    measureValue.setFocusable(true);
+                }
                 break;
             default:
                 dialog.setContentView(R.layout.dialog);
@@ -156,20 +231,43 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
         Button buttonCheck = dialog.findViewById(R.id.buttonCheck);
 
+        if (act.getTitle().equals("History")) {
+            buttonCheck.setVisibility(View.GONE);
+        }
+        else {
+            buttonCheck.setVisibility(View.VISIBLE);
+        }
+
         buttonCancel.setOnClickListener( (v) -> {
             dialog.dismiss();
         });
-
+        
         buttonCheck.setOnClickListener( (v) -> {
-            LocalDate date =  LocalDate.parse( (CharSequence) task.getDay());
-            LocalTime time = LocalTime.parse( (CharSequence) task.getHour());
-            int treatmentIdx = task.getTreatmentIdx();
 
-            App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time).setState(com.example.app.models.Task.State.DONE);
-            dialog.dismiss();
+            if (task.getType().equals("Measurement")) {
+                EditText measureValue = dialog.findViewById(R.id.editTxtValue);
+                String value =  measureValue.getText().toString();
+                if (value.equals("")) {
+                    Toast toast = Toast.makeText(context, "You must define a value", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else {
+                    App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time).setState(com.example.app.models.Task.State.DONE);
+                    TaskMeasurement mTask = (TaskMeasurement) App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time);
+                    mTask.setMeasurementValue(Integer.parseInt(value));
+                    dialog.dismiss();
 
-            tasks.remove(position);
-            setTasks(tasks);
+                    tasks.remove(position);
+                    setTasks(tasks);
+                }
+            }
+            else {
+                App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time).setState(com.example.app.models.Task.State.DONE);
+                dialog.dismiss();
+
+                tasks.remove(position);
+                setTasks(tasks);
+            }
         });
     }
 }
