@@ -91,7 +91,21 @@ public class FrequencyDailyEveryXHours extends Fragment {
                     name = activity.getTaskName();
                     notes = activity.getNotes();
                     //duration = Integer.parseInt(activity.getDuration()); //TODO supor que a duraçao é em dias
-                    createMedicationTreatment(name, pill, notes, 5);
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else if (pill.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Pill field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createMedicationTreatment(name, pill, notes, 5);
+                        Context context = getActivity().getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+                        toast.show();
+                        getActivity().finish();
+                    }
                 } else if (getActivity().getClass().equals(AddMeasurementActivity.class)) {
                     //TODO pq é que o form n tem duraçao !?
                     AddMeasurementActivity activity = (AddMeasurementActivity) getActivity();
@@ -99,24 +113,44 @@ public class FrequencyDailyEveryXHours extends Fragment {
                     name = activity.getSelectedMeasure();
                     notes = activity.getNotes();
                     createMeasurementTreatment(name, notes, 5); //5 duraçao provisoria
+                    Context context = getActivity().getApplicationContext();
+                    Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+                    toast.show();
+                    getActivity().finish();
                 } else if (getActivity().getClass().equals(AddSymptomCheckActivity.class)) {
                     //TODO acrescentar duration??
                     AddSymptomCheckActivity activity = (AddSymptomCheckActivity) getActivity();
                     activity.setValues();
                     name = activity.getSymptomName();
                     notes = activity.getNotes();
-                    createSymptomCheckTreatment(name, notes, 5); //duraçao provisoria
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createSymptomCheckTreatment(name, notes, 5); //duraçao provisoria
+                        Context context = getActivity().getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+                        toast.show();
+                        getActivity().finish();
+                    }
                 } else {
                     AddActivityActivity activity = (AddActivityActivity) getActivity();
                     activity.setValues();
                     name = activity.getActivityName();
                     notes = activity.getNotes();
-                    createActivityTreatment(name, notes, 5);
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createActivityTreatment(name, notes, 5);
+                        Context context = getActivity().getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+                        toast.show();
+                        getActivity().finish();
+                    }
                 }
-                Context context = getActivity().getApplicationContext();
-                Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
-                toast.show();
-                getActivity().finish();
             }
         });
         return view;

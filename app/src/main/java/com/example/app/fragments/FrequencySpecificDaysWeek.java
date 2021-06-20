@@ -82,7 +82,21 @@ public class FrequencySpecificDaysWeek extends Fragment {
                     List<MaterialDayPicker.Weekday> selectedDays = dayPicker.getSelectedDays();
                     ArrayList<DayOfWeek> daysOfWeek = getDaysOfWeek(selectedDays);
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
-                    createMedicationTreatment(name, pill, notes, 5, picker, daysOfWeek);
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else if (pill.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Pill field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createMedicationTreatment(name, pill, notes, 5, picker, daysOfWeek);
+                        Context context = getActivity().getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_LONG);
+                        toast.show();
+                        getActivity().finish();
+                    }
                 } else if (getActivity().getClass().equals(AddMeasurementActivity.class)) {
                     //TODO pq é que o form n tem duraçao !?
                     AddMeasurementActivity activity = (AddMeasurementActivity) getActivity();
@@ -93,6 +107,10 @@ public class FrequencySpecificDaysWeek extends Fragment {
                     ArrayList<DayOfWeek> daysOfWeek = getDaysOfWeek(selectedDays);
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
                     createMeasurementTreatment(name, notes, 5, picker, daysOfWeek); //5 duraçao provisoria
+                    Context context = getActivity().getApplicationContext();
+                    Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_LONG);
+                    toast.show();
+                    getActivity().finish();
                 } else if (getActivity().getClass().equals(AddSymptomCheckActivity.class)) {
                     //TODO acrescentar duration??
                     AddSymptomCheckActivity activity = (AddSymptomCheckActivity) getActivity();
@@ -102,7 +120,17 @@ public class FrequencySpecificDaysWeek extends Fragment {
                     List<MaterialDayPicker.Weekday> selectedDays = dayPicker.getSelectedDays();
                     ArrayList<DayOfWeek> daysOfWeek = getDaysOfWeek(selectedDays);
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
-                    createSymptomCheckTreatment(name, notes, 5, picker, daysOfWeek); //duraçao provisoria
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createSymptomCheckTreatment(name, notes, 5, picker, daysOfWeek); //duraçao provisoria
+                        Context context = getActivity().getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_LONG);
+                        toast.show();
+                        getActivity().finish();
+                    }
                 } else {
                     AddActivityActivity activity = (AddActivityActivity) getActivity();
                     activity.setValues();
@@ -111,12 +139,18 @@ public class FrequencySpecificDaysWeek extends Fragment {
                     List<MaterialDayPicker.Weekday> selectedDays = dayPicker.getSelectedDays();
                     ArrayList<DayOfWeek> daysOfWeek = getDaysOfWeek(selectedDays);
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
-                    createActivityTreatment(name, notes, 5, picker, daysOfWeek);
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createActivityTreatment(name, notes, 5, picker, daysOfWeek);
+                        Context context = getActivity().getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_LONG);
+                        toast.show();
+                        getActivity().finish();
+                    }
                 }
-                Context context = getActivity().getApplicationContext();
-                Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_LONG);
-                toast.show();
-                getActivity().finish();
             }
         });
 

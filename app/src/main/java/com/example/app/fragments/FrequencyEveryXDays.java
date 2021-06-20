@@ -72,9 +72,18 @@ public class FrequencyEveryXDays extends Fragment {
                     notes = activity.getNotes();
                     //duration = Integer.parseInt(activity.getDuration()); //TODO supor que a duraçao é em dias
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
-                    createMedicationTreatment(name, pill, notes, 5, picker);
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else if (pill.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Pill field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createMedicationTreatment(name, pill, notes, 5, picker);
+                    }
                 } else if (getActivity().getClass().equals(AddMeasurementActivity.class)) {
-                    //TODO pq é que o form n tem duraçao !?
                     AddMeasurementActivity activity = (AddMeasurementActivity) getActivity();
                     activity.setValues();
                     name = activity.getSelectedMeasure();
@@ -88,19 +97,27 @@ public class FrequencyEveryXDays extends Fragment {
                     name = activity.getSymptomName();
                     notes = activity.getNotes();
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
-                    createSymptomCheckTreatment(name, notes, 5, picker); //duraçao provisoria
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createSymptomCheckTreatment(name, notes, 5, picker); //duraçao provisoria
+                    }
                 } else {
                     AddActivityActivity activity = (AddActivityActivity) getActivity();
                     activity.setValues();
                     name = activity.getActivityName();
                     notes = activity.getNotes();
                     ArrayList<Picker> picker = frequencyXTimesADay.getFinalPicker();
-                    createActivityTreatment(name, notes, 5, picker);
+                    if (name.equals("")) {
+                        Toast toast  = Toast.makeText(getContext(),"Missing Name field", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    else {
+                        createActivityTreatment(name, notes, 5, picker);
+                    }
                 }
-                Context context = getActivity().getApplicationContext();
-                Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
-                toast.show();
-                getActivity().finish();
             }
         });
 
@@ -117,22 +134,34 @@ public class FrequencyEveryXDays extends Fragment {
         LocalDate startDate = LocalDate.now();
         TreeMap<LocalTime, TaskMedication> dailyTasks = new TreeMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        String sInterval = ((EditText) view.findViewById(R.id.editTextRemindDays)).getText().toString();
 
-        int interval = Integer.parseInt(((EditText) view.findViewById(R.id.editTextRemindDays)).getText().toString());
+        if (!sInterval.equals("")) {
 
-        EveryXDays frq = new EveryXDays(interval, startDate); //TODO admitindo que é smp no dia atual
+            int interval = Integer.parseInt(sInterval);
 
-        for (int i = 0; i < picker.size(); i++) {
-            LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
-            int dose = picker.get(i).getDose();
-            TaskMedication task = new TaskMedication(hour, dose, pill);
-            dailyTasks.put(hour, task);
+            EveryXDays frq = new EveryXDays(interval, startDate); //TODO admitindo que é smp no dia atual
+
+            for (int i = 0; i < picker.size(); i++) {
+                LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
+                int dose = picker.get(i).getDose();
+                TaskMedication task = new TaskMedication(hour, dose, pill);
+                dailyTasks.put(hour, task);
+            }
+
+            LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+            com.example.app.models.Treatment<TaskMedication> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskMedication.class);
+
+            App.listTreatment.add(treatment);
+            Context context = getActivity().getApplicationContext();
+            Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+            toast.show();
+            getActivity().finish();
         }
-
-        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
-        com.example.app.models.Treatment<TaskMedication> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskMedication.class);
-
-        App.listTreatment.add(treatment);
+        else {
+            Toast toast  = Toast.makeText(getContext(),"Missing Remind field", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -142,20 +171,35 @@ public class FrequencyEveryXDays extends Fragment {
         TreeMap<LocalTime, TaskMeasurement> dailyTasks = new TreeMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        int interval = Integer.parseInt(((EditText) view.findViewById(R.id.editTextRemindDays)).getText().toString());
+        String sInterval = ((EditText) view.findViewById(R.id.editTextRemindDays)).getText().toString();
 
-        EveryXDays frq = new EveryXDays(interval, startDate); //TODO admitindo que é smp no dia atual
+        if (!sInterval.equals("")) {
 
-        for (int i = 0; i < picker.size(); i++) {
-            LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
-            TaskMeasurement task = new TaskMeasurement(hour, name);
-            dailyTasks.put(hour, task);
+            int interval = Integer.parseInt(sInterval);
+
+            EveryXDays frq = new EveryXDays(interval, startDate); //TODO admitindo que é smp no dia atual
+
+            for (int i = 0; i < picker.size(); i++) {
+                LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
+                TaskMeasurement task = new TaskMeasurement(hour, name);
+                dailyTasks.put(hour, task);
+            }
+
+            LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+            com.example.app.models.Treatment<TaskMeasurement> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskMeasurement.class);
+
+            App.listTreatment.add(treatment);
+
+            App.listTreatment.add(treatment);
+            Context context = getActivity().getApplicationContext();
+            Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+            toast.show();
+            getActivity().finish();
         }
-
-        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
-        com.example.app.models.Treatment<TaskMeasurement> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskMeasurement.class);
-
-        App.listTreatment.add(treatment);
+        else {
+            Toast toast  = Toast.makeText(getContext(),"Missing Remind field", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -165,20 +209,32 @@ public class FrequencyEveryXDays extends Fragment {
         TreeMap<LocalTime, TaskSymptomCheck> dailyTasks = new TreeMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        int interval = Integer.parseInt(((EditText) view.findViewById(R.id.editTextRemindDays)).getText().toString());
+        String sInterval = ((EditText) view.findViewById(R.id.editTextRemindDays)).getText().toString();
 
-        EveryXDays frq = new EveryXDays(interval, startDate); //TODO admitindo que é smp no dia atual
+        if (!sInterval.equals("")) {
 
-        for (int i = 0; i < picker.size(); i++) {
-            LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
-            TaskSymptomCheck task = new TaskSymptomCheck(hour);
-            dailyTasks.put(hour, task);
+            int interval = Integer.parseInt(sInterval);
+
+            EveryXDays frq = new EveryXDays(interval, startDate); //TODO admitindo que é smp no dia atual
+
+            for (int i = 0; i < picker.size(); i++) {
+                LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
+                TaskSymptomCheck task = new TaskSymptomCheck(hour);
+                dailyTasks.put(hour, task);
+            }
+
+            LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+            com.example.app.models.Treatment<TaskSymptomCheck> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskSymptomCheck.class);
+
+            App.listTreatment.add(treatment);
+            Context context = getActivity().getApplicationContext();
+            Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+            toast.show();
+            getActivity().finish();
+        } else {
+            Toast toast = Toast.makeText(getContext(), "Missing Remind field", Toast.LENGTH_SHORT);
+            toast.show();
         }
-
-        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
-        com.example.app.models.Treatment<TaskSymptomCheck> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskSymptomCheck.class);
-
-        App.listTreatment.add(treatment);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -188,20 +244,32 @@ public class FrequencyEveryXDays extends Fragment {
         TreeMap<LocalTime, TaskActivity> dailyTasks = new TreeMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        int interval = Integer.parseInt(((EditText) view.findViewById(R.id.editTextRemindDays)).getText().toString());
+        String sInterval = ((EditText) view.findViewById(R.id.editTextRemindDays)).getText().toString();
 
-        EveryXDays frq = new EveryXDays(interval, startDate); //TODO admitindo que é smp no dia atual
+        if (!sInterval.equals("")) {
 
-        for (int i = 0; i < picker.size(); i++) {
-            LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
-            int dose = picker.get(i).getDose();
-            TaskActivity task = new TaskActivity(hour);
-            dailyTasks.put(hour, task);
+            int interval = Integer.parseInt(sInterval);
+
+            EveryXDays frq = new EveryXDays(interval, startDate); //TODO admitindo que é smp no dia atual
+
+            for (int i = 0; i < picker.size(); i++) {
+                LocalTime hour = LocalTime.parse(picker.get(i).getHour(), formatter);
+                int dose = picker.get(i).getDose();
+                TaskActivity task = new TaskActivity(hour);
+                dailyTasks.put(hour, task);
+            }
+
+            LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
+            com.example.app.models.Treatment<TaskActivity> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskActivity.class);
+
+            App.listTreatment.add(treatment);
+            Context context = getActivity().getApplicationContext();
+            Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+            toast.show();
+            getActivity().finish();
+        } else {
+            Toast toast = Toast.makeText(getContext(), "Missing Remind field", Toast.LENGTH_SHORT);
+            toast.show();
         }
-
-        LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
-        com.example.app.models.Treatment<TaskActivity> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskActivity.class);
-
-        App.listTreatment.add(treatment);
     }
 }
