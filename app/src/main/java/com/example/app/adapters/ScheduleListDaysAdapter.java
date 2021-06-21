@@ -3,6 +3,7 @@ package com.example.app.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 public class ScheduleListDaysAdapter extends RecyclerView.Adapter<ScheduleListDaysAdapter.ViewHolder> {
     ArrayList<LocalDate> listDays;
-    Map<LocalDate, ArrayList<Task>>dailyTasks;
+    Map<LocalDate, ArrayList<Task>> dailyTasks;
     Context context;
 
     public ScheduleListDaysAdapter(Context context, ArrayList<LocalDate> listDays, Map<LocalDate, ArrayList<Task>> dailyTasks) {
@@ -52,6 +53,8 @@ public class ScheduleListDaysAdapter extends RecyclerView.Adapter<ScheduleListDa
 
         //Initialize inner recycler
         TasksRecViewAdapter dailyAdapter = new TasksRecViewAdapter(context);
+        Log.d("Test", listDays.get(position).toString());
+        Log.d("Test", dailyTasks.get(listDays.get(position)).toString());
         Collections.sort(dailyTasks.get(listDays.get(position)));
         dailyAdapter.setTasks(dailyTasks.get(listDays.get(position)));
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);

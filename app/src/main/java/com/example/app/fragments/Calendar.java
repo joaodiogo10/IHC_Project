@@ -1,10 +1,13 @@
 package com.example.app.fragments;
 
 import android.app.usage.UsageEvents;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -14,9 +17,12 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 
 import com.example.app.R;
+import com.example.app.activities.CalendarDaySelected;
+import com.example.app.activities.LoginActivity;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -44,13 +50,13 @@ public class Calendar extends Fragment {
         CalendarView calendar = view.findViewById(R.id.calendarView);
 
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String date = dayOfMonth + "/" + month + "/" + year;
-                Date date1 = new Date(year-1900,month,dayOfMonth);
-                Log.d(TAG, "onSelectedDayChange: date: " + date);
-                System.out.println("onSelectedDayChange: date2: " + date1);
-                //startActivity(new Intent(getActivity(), LoginActivity.class)); // mudar loginActivity por CalendarDaySelected
+                LocalDate date = LocalDate.of(year, month + 1, dayOfMonth);
+                Intent intent = new Intent(getActivity(), CalendarDaySelected.class);
+                intent.putExtra("date", date);
+                startActivity(intent);
             }
         });
     }

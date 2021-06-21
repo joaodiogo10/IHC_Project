@@ -87,7 +87,17 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         LocalTime time = LocalTime.parse( (CharSequence) tasks.get(position).getHour());
 
         com.example.app.models.Task stateTask = App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time);
-        if (date.compareTo(LocalDate.now()) < 0) {
+        if (stateTask.getState() == com.example.app.models.Task.State.DONE) {
+            holder.stateImageRed.setVisibility(View.GONE);
+            holder.stateImageGreen.setVisibility(View.VISIBLE);
+            holder.stateImageYellow.setVisibility(View.GONE);
+        }
+        else if (date.compareTo(LocalDate.now()) > 0) {
+            holder.stateImageRed.setVisibility(View.GONE);
+            holder.stateImageGreen.setVisibility(View.GONE);
+            holder.stateImageYellow.setVisibility(View.VISIBLE);
+        }
+        else if (date.compareTo(LocalDate.now()) < 0) {
             holder.stateImageRed.setVisibility(View.VISIBLE);
             holder.stateImageGreen.setVisibility(View.GONE);
             holder.stateImageYellow.setVisibility(View.GONE);
@@ -101,11 +111,6 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
             holder.stateImageRed.setVisibility(View.GONE);
             holder.stateImageGreen.setVisibility(View.GONE);
             holder.stateImageYellow.setVisibility(View.VISIBLE);
-        }
-        else if (stateTask.getState() == com.example.app.models.Task.State.DONE) {
-            holder.stateImageRed.setVisibility(View.GONE);
-            holder.stateImageGreen.setVisibility(View.VISIBLE);
-            holder.stateImageYellow.setVisibility(View.GONE);
         }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
@@ -264,8 +269,9 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
             else {
                 App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time).setState(com.example.app.models.Task.State.DONE);
                 dialog.dismiss();
-
-                tasks.remove(position);
+                if(act.getTitle().equals("Today")) {
+                    tasks.remove(position);
+                }
                 setTasks(tasks);
             }
         });

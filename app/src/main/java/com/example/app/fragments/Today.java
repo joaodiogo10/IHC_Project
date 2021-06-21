@@ -63,7 +63,7 @@ public class Today extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tasksRecView = view.findViewById(R.id.tasksTodayRecyclerView);
         emptyTasks = view.findViewById(R.id.todayEmptyTasks);
-        view.findViewById(R.id.floatingActionButton).setOnClickListener(
+        view.findViewById(R.id.buttonAddReminder).setOnClickListener(
                 v -> NavHostFragment.findNavController(this).navigate(R.id.action_todayFragment_to_treatmentBottomSheetFragment)
         );
 
@@ -92,8 +92,7 @@ public class Today extends Fragment {
         for(int i = 0; i < treatments.size(); i++) {
             todayTasks = treatments.get(i).getDailyTaskByDate(LocalDate.now());
             if (todayTasks != null) {
-                empty = false;
-                treatmentHandlerPicker(treatments.get(i), todayTasks, i);
+                empty = !treatmentHandlerPicker(treatments.get(i), todayTasks, i);
             }
         }
 
@@ -107,66 +106,80 @@ public class Today extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void treatmentHandlerPicker(Treatment treatment, Map<LocalTime, Task> dailyTasks, int treatmentIdx) {
+    private boolean treatmentHandlerPicker(Treatment treatment, Map<LocalTime, Task> dailyTasks, int treatmentIdx) {
         if (treatment.getType().equals(TaskMedication.class)) {
-            handleMedicationTask(dailyTasks, treatment.getName(), treatmentIdx);
+            return handleMedicationTask(dailyTasks, treatment.getName(), treatmentIdx);
         } else if (treatment.getType().equals(TaskActivity.class)) {
-            handleActivityTask(dailyTasks, treatment.getName(), treatmentIdx);
+            return handleActivityTask(dailyTasks, treatment.getName(), treatmentIdx);
         } else if (treatment.getType().equals(TaskMeasurement.class)) {
-            handleMeasurementTask(dailyTasks, treatment.getName(), treatmentIdx);
+            return handleMeasurementTask(dailyTasks, treatment.getName(), treatmentIdx);
         } else {
-            handleSymptomCheckTask(dailyTasks, treatment.getName(), treatmentIdx);
+            return handleSymptomCheckTask(dailyTasks, treatment.getName(), treatmentIdx);
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleSymptomCheckTask(Map<LocalTime, Task> dailyTasks, String treatmentName, int treatmentIdx) {
-
+    private boolean handleSymptomCheckTask(Map<LocalTime, Task> dailyTasks, String treatmentName, int treatmentIdx) {
+        boolean flagTasks = false;
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
             if(dailyTasks.get(time).getState() == Task.State.PENDING) {
+                flagTasks = true;
                 TaskSymptomCheck task = (TaskSymptomCheck) dailyTasks.get(time);
                 todayTasksShow.add(new com.example.app.classesAna.Task("Symptom Check", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
             }
         }
+
+        return flagTasks;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleMeasurementTask(Map<LocalTime, Task> dailyTasks, String treatmentName, int treatmentIdx) {
+    private boolean handleMeasurementTask(Map<LocalTime, Task> dailyTasks, String treatmentName, int treatmentIdx) {
+        boolean flagTasks = false;
 
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
             if(dailyTasks.get(time).getState() == Task.State.PENDING) {
+                flagTasks = true;
                 TaskMeasurement task = (TaskMeasurement) dailyTasks.get(time);
                 todayTasksShow.add(new com.example.app.classesAna.Task("Measurement", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
             }
         }
+        return flagTasks;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleActivityTask(Map<LocalTime, Task> dailyTasks, String treatmentName, int treatmentIdx) {
+    private boolean handleActivityTask(Map<LocalTime, Task> dailyTasks, String treatmentName, int treatmentIdx) {
+        boolean flagTasks = false;
 
         for (LocalTime time :
                 dailyTasks.keySet()) {
             if(dailyTasks.get(time).getState() == Task.State.PENDING) {
+                flagTasks = true;
                 TaskActivity task = (TaskActivity) dailyTasks.get(time);
                 todayTasksShow.add(new com.example.app.classesAna.Task("Activity", treatmentName, LocalDate.now().toString(), time.toString(), treatmentIdx));
             }
         }
+        return flagTasks;
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void handleMedicationTask(Map<LocalTime, Task> dailyTasks, String treatmentName, int treatmentIdx) {
+    private boolean handleMedicationTask(Map<LocalTime, Task> dailyTasks, String treatmentName, int treatmentIdx) {
+        boolean flagTasks = false;
 
         for (LocalTime time :
                 dailyTasks.keySet()) {
 
             if (dailyTasks.get(time).getState() == Task.State.PENDING) {
+                flagTasks = true;
                 TaskMedication task = (TaskMedication) dailyTasks.get(time);
                 todayTasksShow.add(new MedicationTask("Medication", treatmentName, LocalDate.now().toString(), time.toString(), task.getPillName(), task.getDose(), treatmentIdx));
             }
         }
+        return flagTasks;
+
     }
 }

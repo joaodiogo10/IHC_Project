@@ -10,7 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
-        <activity android:name=".CalendarDaySelected"></activity>
         <activity
             android:name=".activities.LoginActivity"
             android:theme="@style/Theme.App.NoActionBar">
@@ -19,6 +18,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.CalendarDaySelected"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity
             android:name=".activities.RegisterActivity"

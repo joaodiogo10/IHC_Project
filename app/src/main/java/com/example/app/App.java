@@ -35,10 +35,10 @@ public class App extends Application {
         super.onCreate();
         listTreatment = new ArrayList<Treatment>();
         //Test master
-       //testCreateMedicationTreatment();
-       // testCreateActivityTreatment();
-       // testCreateActivityMeasurement();
-       // testCreateActivitySymptomCheck();
+       testCreateMedicationTreatment();
+       testCreateActivityTreatment();
+       testCreateActivityMeasurement();
+       testCreateActivitySymptomCheck();
 
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -60,7 +60,7 @@ public class App extends Application {
         dailyTasks.put(secondTime, new TaskSymptomCheck(secondTime));
 
         LocalDate startDate = LocalDate.of(2021, 5, 1);
-        LocalDate endDate = LocalDate.of(2021, 5, 30);
+        LocalDate endDate = LocalDate.of(2021, 7, 30);
         Treatment<TaskSymptomCheck> treatment = new Treatment<TaskSymptomCheck>("SymptomCheck", frq, "notes", startDate, endDate, dailyTasks, TaskSymptomCheck.class);
 
         App.listTreatment.add(treatment);
@@ -82,7 +82,7 @@ public class App extends Application {
         dailyTasks.put(secondTime, new TaskMeasurement(secondTime,"Heart Rate"));
 
 
-        LocalDate endDate = LocalDate.of(2021, 5, 30);
+        LocalDate endDate = LocalDate.of(2021, 7, 30);
         Treatment<TaskMeasurement> treatment = new Treatment<TaskMeasurement>("Heart Rate", frq, "notes", startDate, endDate, dailyTasks, TaskMeasurement.class);
 
         App.listTreatment.add(treatment);
@@ -102,7 +102,7 @@ public class App extends Application {
 
 
         LocalDate startDate = LocalDate.of(2021, 5, 1);
-        LocalDate endDate = LocalDate.of(2021, 5, 30);
+        LocalDate endDate = LocalDate.of(2021, 7, 30);
         Treatment<TaskActivity> treatment = new Treatment<TaskActivity>(">,<", frq, "notes", startDate, endDate, dailyTasks, TaskActivity.class);
 
         App.listTreatment.add(treatment);
@@ -124,7 +124,7 @@ public class App extends Application {
         }
 
         LocalDate startDate = LocalDate.of(2021, 5, 1);
-        LocalDate endDate = LocalDate.of(2021, 5, 30);
+        LocalDate endDate = LocalDate.of(2021, 7, 30);
         Treatment<TaskMedication> treatment = new Treatment<TaskMedication>("Tomar Xarope",frq, "notes", startDate, endDate, dailyTasks, TaskMedication.class);
         //Log.d("Test", treatment.toString());
 
