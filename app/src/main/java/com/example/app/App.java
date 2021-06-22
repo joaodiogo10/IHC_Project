@@ -35,10 +35,10 @@ public class App extends Application {
         super.onCreate();
         listTreatment = new ArrayList<Treatment>();
         //Test master
-       testCreateMedicationTreatment();
-       testCreateActivityTreatment();
-       testCreateActivityMeasurement();
-       testCreateActivitySymptomCheck();
+       //testCreateMedicationTreatment();
+       //testCreateActivityTreatment();
+       //testCreateActivityMeasurement();
+       //testCreateActivitySymptomCheck();
 
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
