@@ -102,7 +102,7 @@ public class FrequencyDailyEveryXHours extends Fragment {
                     else {
                         createMedicationTreatment(name, pill, notes, 5);
                         Context context = getActivity().getApplicationContext();
-                        Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(context, "Reminder added successfully!", Toast.LENGTH_SHORT);
                         toast.show();
                         getActivity().finish();
                     }

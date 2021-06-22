@@ -93,7 +93,7 @@ public class FrequencySpecificDaysWeek extends Fragment {
                     else {
                         createMedicationTreatment(name, pill, notes, 5, picker, daysOfWeek);
                         Context context = getActivity().getApplicationContext();
-                        Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(context, "Reminder added successfully!", Toast.LENGTH_LONG);
                         toast.show();
                         getActivity().finish();
                     }

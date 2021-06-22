@@ -92,7 +92,8 @@ public class Today extends Fragment {
         for(int i = 0; i < treatments.size(); i++) {
             todayTasks = treatments.get(i).getDailyTaskByDate(LocalDate.now());
             if (todayTasks != null) {
-                empty = !treatmentHandlerPicker(treatments.get(i), todayTasks, i);
+                boolean gotTasks = treatmentHandlerPicker(treatments.get(i), todayTasks, i);
+                empty = empty && !gotTasks;
             }
         }
 
