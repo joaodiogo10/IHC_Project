@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/todayFragment"
-        android:icon="@drawable/ic_baseline_check_box_24"
+        android:icon="@drawable/ic_clipboard"
         android:title="@string/nav_today"
         />
 
@@ -16,13 +16,13 @@
 
     <item
         android:id="@+id/historyFragment"
-        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:icon="@drawable/ic_history"
         android:title="@string/nav_history"
         />
 
     <item
         android:id="@+id/treatmentFragment"
-        android:icon="@drawable/ic_pill"
-        android:title="@string/nav_treatment"
+        android:icon="@drawable/ic_lembrete"
+        android:title="@string/nav_reminders"
         />
 </menu>

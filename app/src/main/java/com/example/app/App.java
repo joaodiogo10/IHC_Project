@@ -28,7 +28,7 @@ import java.util.TreeMap;
 public class App extends Application {
 
     public static List<Treatment> listTreatment;
-    public static boolean confirm = true;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {

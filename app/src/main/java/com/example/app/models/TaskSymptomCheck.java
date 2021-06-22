@@ -32,6 +32,28 @@ public class TaskSymptomCheck extends Task{
             this.feeling = feeling;
     }
 
+    public Feeling getFeeling() {
+        return feeling;
+    }
+
+    static public Feeling getEnumFeeling(String text) {
+
+        if (text.equals("very bad")) {
+            return Feeling.VERY_BAD;
+        }
+        else if (text.equals("bad")) {
+            return Feeling.BAD;
+        }
+        else  if (text.equals("moderate")) {
+            return Feeling.MODERATE;
+        }
+        else if (text.equals("good")) {
+            return Feeling.GOOD;
+        }
+
+        return Feeling.VERY_GOOD;
+    }
+
     public String toString() {
         return "SymptomCheckTask{" +
                 "Feeling= " + feeling == null ? "undefined" : feeling +

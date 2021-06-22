@@ -3,6 +3,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nav_today">Today</string>
     <string name="nav_calender">Calendar</string>
+    <string name="nav_reminders">Reminders</string>
     <string name="nav_history">History</string>
     <string name="nav_treatment">Treatments</string>
     <string name="treatment_medication">Medication</string>

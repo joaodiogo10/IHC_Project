@@ -31,6 +31,7 @@ import com.example.app.R;
 import com.example.app.classesAna.MedicationTask;
 import com.example.app.classesAna.Task;
 import com.example.app.models.TaskMeasurement;
+import com.example.app.models.TaskSymptomCheck;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -174,6 +175,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
             case "Symptom Check":
                 dialog.setContentView(R.layout.dialog_symptom_check);
                 RadioGroup radioGroup = dialog.findViewById(R.id.radioGroup);
+                TaskSymptomCheck sTask = (TaskSymptomCheck) App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time);
 
                 radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
@@ -184,6 +186,36 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
                         feelingLegend.setText(radioButton.getText());
                     }
                 });
+
+                if (sTask.getFeeling() != null) {
+                    if (sTask.getFeeling().getText().equals("very bad")) {
+                        RadioButton button = (RadioButton) dialog.findViewById(R.id.cryingButton);
+                        button.setChecked(true);
+                    }
+                    else if (sTask.getFeeling().getText().equals("bad")) {
+                        RadioButton button = (RadioButton) dialog.findViewById(R.id.sadButton);
+                        button.setChecked(true);
+                    }
+                    else  if (sTask.getFeeling().getText().equals("moderate")) {
+                        RadioButton button = (RadioButton) dialog.findViewById(R.id.neutralButton);
+                        button.setChecked(true);
+                    }
+                    else if (sTask.getFeeling().getText().equals("good")) {
+                        RadioButton button = (RadioButton) dialog.findViewById(R.id.happyButton);
+                        button.setChecked(true);
+                    }
+                    else {
+                        RadioButton button = (RadioButton) dialog.findViewById(R.id.veryHappyButton);
+                        button.setChecked(true);
+                    }
+                }
+
+                if (act.getTitle().equals("History")) {
+                    radioGroup.setFocusable(false);
+                }
+                else {
+                    radioGroup.setFocusable(true);
+                }
                 break;
             case "Measurement":
                 dialog.setContentView(R.layout.dialog_measurement);
@@ -261,9 +293,33 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
                     TaskMeasurement mTask = (TaskMeasurement) App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time);
                     mTask.setMeasurementValue(Integer.parseInt(value));
                     dialog.dismiss();
-
-                    tasks.remove(position);
+                    if(act.getTitle().equals("Today")) {
+                        tasks.remove(position);
+                    }
                     setTasks(tasks);
+                    Toast toast = Toast.makeText(context, "Task confirmed with success", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+            else if (task.getType().equals("Symptom Check")) {
+                RadioGroup radioGroup = dialog.findViewById(R.id.radioGroup);
+                TaskSymptomCheck sTask = (TaskSymptomCheck) App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time);
+
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
+                    Toast toast = Toast.makeText(context, "You must set a feeling", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else {
+                    RadioButton button = (RadioButton) dialog.findViewById(radioGroup.getCheckedRadioButtonId());
+                    App.listTreatment.get(treatmentIdx).getTaskByDateTime(date,time).setState(com.example.app.models.Task.State.DONE);
+                    sTask.setFeeling(TaskSymptomCheck.getEnumFeeling(button.getText().toString()));
+                    dialog.dismiss();
+                    if(act.getTitle().equals("Today")) {
+                        tasks.remove(position);
+                    }
+                    setTasks(tasks);
+                    Toast toast = Toast.makeText(context, "Task confirmed with success", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
             else {
@@ -273,6 +329,8 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
                     tasks.remove(position);
                 }
                 setTasks(tasks);
+                Toast toast = Toast.makeText(context, "Task confirmed with success", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
     }
