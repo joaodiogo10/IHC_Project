@@ -2,6 +2,8 @@ package com.example.app.models;
 
 import androidx.annotation.NonNull;
 
+import com.example.app.App;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalTime;

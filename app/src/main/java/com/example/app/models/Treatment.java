@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.SortedList;
 
+import com.example.app.App;
+
 import java.lang.reflect.ParameterizedType;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -58,6 +60,22 @@ public class Treatment<T extends Task> {
     }
     */
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void confirmAllTasks(LocalDate endDate) {
+        LocalDate tmp = startDate;
+        int i = 0;
+
+        while (tmp.compareTo(endDate) <= 0) {
+            if(tasks.get(tmp) != null) {
+                for (LocalTime time : tasks.get(tmp).keySet()) {
+                    tasks.get(tmp).get(time).setState(Task.State.DONE);
+                }
+            }
+            i++;
+            tmp = startDate.plusDays(i);
+
+        }
+    }
     public Class<T> getType() {
         return this.type;
     }

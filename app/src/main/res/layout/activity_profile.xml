@@ -33,7 +33,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/profile_image"
                 android:includeFontPadding="false"
-                android:text="Admin"
+                android:text="Maria"
                 android:textSize="20sp" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/profile_image"
                 android:includeFontPadding="false"
-                android:text="admin"
+                android:text="Ferreira"
                 android:textSize="14sp" />
 
         </RelativeLayout>
@@ -60,7 +60,7 @@
                 android:id="@+id/Layout_profile_FirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Name"
+                android:hint="First name"
                 app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:text="Admin" />
+                    android:text="Maria"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
 
                     android:background="#FFFFFF"
-                    android:text="admin" />
+                    android:text="Ferreira" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,7 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:text="Admin@admin.pt" />
+                    android:text="mariaf@gmail.pt" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
                     android:inputType="textPassword"
-                    android:text="admin" />
+                    android:text="mariaihc" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

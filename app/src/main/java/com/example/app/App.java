@@ -28,47 +28,44 @@ import java.util.TreeMap;
 public class App extends Application {
 
     public static List<Treatment> listTreatment;
-
+    public static boolean confirm = true;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {
         super.onCreate();
         listTreatment = new ArrayList<Treatment>();
         //Test master
-       testCreateMedicationTreatment();
+       //testCreateMedicationTreatment();
        testCreateActivityTreatment();
-       testCreateActivityMeasurement();
+       //testCreateActivityMeasurement();
        testCreateActivitySymptomCheck();
-
     }
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void testCreateActivitySymptomCheck() {
         TreeMap<LocalTime, TaskSymptomCheck> dailyTasks = new TreeMap<>();
 
         ArrayList<DayOfWeek> daysOfWeek = new ArrayList<>();
-        daysOfWeek.add(DayOfWeek.MONDAY);
-        daysOfWeek.add(DayOfWeek.SATURDAY);
-        daysOfWeek.add(DayOfWeek.THURSDAY);
+        daysOfWeek.add(DayOfWeek.WEDNESDAY);
 
         SpecificDaysOfWeek frq = new SpecificDaysOfWeek(daysOfWeek);
 
-        LocalTime fistTime = LocalTime.of(9, 15);
-        LocalTime secondTime = LocalTime.of(22, 15);
+        LocalTime time = LocalTime.of(18, 0);
 
+        dailyTasks.put(time, new TaskSymptomCheck(time));
 
-        dailyTasks.put(fistTime, new TaskSymptomCheck(fistTime));
-        dailyTasks.put(secondTime, new TaskSymptomCheck(secondTime));
-
-        LocalDate startDate = LocalDate.of(2021, 5, 1);
-        LocalDate endDate = LocalDate.of(2021, 7, 30);
-        Treatment<TaskSymptomCheck> treatment = new Treatment<TaskSymptomCheck>("SymptomCheck", frq, "notes", startDate, endDate, dailyTasks, TaskSymptomCheck.class);
-
+        LocalDate startDate = LocalDate.of(2021, 1, 1);
+        LocalDate endDate = LocalDate.of(2021, 7, 23);
+        Treatment<TaskSymptomCheck> treatment = new Treatment<TaskSymptomCheck>("Dor no joelho", frq, "", startDate, endDate, dailyTasks, TaskSymptomCheck.class);
+        treatment.confirmAllTasks(LocalDate.of(2021, 6, 20));
         App.listTreatment.add(treatment);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void testCreateActivityMeasurement() {
         TreeMap<LocalTime, TaskMeasurement> dailyTasks = new TreeMap<>();
+
         int interval = 5;
         LocalDate startDate = LocalDate.of(2021, 5, 1);
 
@@ -91,7 +88,7 @@ public class App extends Application {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void testCreateActivityTreatment() {
         TreeMap<LocalTime, TaskActivity> dailyTasks = new TreeMap<>();
-        DailyXTimesADay frq = new DailyXTimesADay();
+        /*DailyXTimesADay frq = new DailyXTimesADay();
 
         LocalTime fistTime = LocalTime.of(7, 30);
         LocalTime secondTime = LocalTime.of(20, 30);
@@ -101,9 +98,22 @@ public class App extends Application {
         dailyTasks.put(secondTime, new TaskActivity(secondTime));
 
 
-        LocalDate startDate = LocalDate.of(2021, 5, 1);
-        LocalDate endDate = LocalDate.of(2021, 7, 30);
-        Treatment<TaskActivity> treatment = new Treatment<TaskActivity>(">,<", frq, "notes", startDate, endDate, dailyTasks, TaskActivity.class);
+        LocalDate startDate = LocalDate.of(2021, 1, 1);
+        LocalDate endDate = LocalDate.of(2021, 6, 23);
+        */
+        ArrayList<DayOfWeek> daysOfWeek = new ArrayList<>();
+        daysOfWeek.add(DayOfWeek.WEDNESDAY);
+
+        SpecificDaysOfWeek frq = new SpecificDaysOfWeek(daysOfWeek);
+
+        LocalTime time = LocalTime.of(18, 0);
+
+        dailyTasks.put(time, new TaskActivity(time));
+
+        LocalDate startDate = LocalDate.of(2021, 1, 1);
+        LocalDate endDate = LocalDate.of(2021, 7, 23);
+        Treatment<TaskActivity> treatment = new Treatment<TaskActivity>("Caminhada", frq, "", startDate, endDate, dailyTasks, TaskActivity.class);
+        treatment.confirmAllTasks(LocalDate.of(2021, 6, 20));
 
         App.listTreatment.add(treatment);
     }

@@ -49,17 +49,19 @@ public class ScheduleListDaysAdapter extends RecyclerView.Adapter<ScheduleListDa
     @Override
     public void onBindViewHolder(@NonNull ScheduleListDaysAdapter.ViewHolder holder, int position) {
         LocalDate date = listDays.get(position);
-        holder.day.setText(capitalize(date.getDayOfWeek().toString())+ ", " + date.toString());
-
-        //Initialize inner recycler
-        TasksRecViewAdapter dailyAdapter = new TasksRecViewAdapter(context);
-        Log.d("Test", listDays.get(position).toString());
-        Log.d("Test", dailyTasks.get(listDays.get(position)).toString());
-        Collections.sort(dailyTasks.get(listDays.get(position)));
-        dailyAdapter.setTasks(dailyTasks.get(listDays.get(position)));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-        holder.rvDailyTasks.setLayoutManager(layoutManager);
-        holder.rvDailyTasks.setAdapter(dailyAdapter);
+        if(dailyTasks.get(date) != null) {
+            holder.day.setText(capitalize(date.getDayOfWeek().toString())+ ", " + date.toString());
+            //Initialize inner recycler
+            TasksRecViewAdapter dailyAdapter = new TasksRecViewAdapter(context);
+            Collections.sort(dailyTasks.get(date));
+            dailyAdapter.setTasks(dailyTasks.get(date));
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            holder.rvDailyTasks.setLayoutManager(layoutManager);
+            holder.rvDailyTasks.setAdapter(dailyAdapter);
+        }
+        else {
+            holder.day.setText("");
+        }
     }
 
     @Override

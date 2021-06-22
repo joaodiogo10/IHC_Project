@@ -187,10 +187,8 @@ public class FrequencyEveryXDays extends Fragment {
 
             LocalDate endDate = startDate.plusDays(duration); //TODO usar a duraçao aqui
             com.example.app.models.Treatment<TaskMeasurement> treatment = new Treatment<>(name, frq, notes, startDate, endDate, dailyTasks, TaskMeasurement.class);
-
             App.listTreatment.add(treatment);
 
-            App.listTreatment.add(treatment);
             Context context = getActivity().getApplicationContext();
             Toast toast = Toast.makeText(context, "Treatment added successfully!", Toast.LENGTH_SHORT);
             toast.show();

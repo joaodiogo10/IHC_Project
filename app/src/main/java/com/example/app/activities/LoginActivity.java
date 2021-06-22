@@ -19,7 +19,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private Button register;
-    private int attempts = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean a = validateAcc(email.getText().toString(), password.getText().toString());
                 if (a) {
-                    Toast.makeText(LoginActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Welcome Maria!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 }else{
@@ -55,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean validateAcc(String email, String password){
-        if(email.equals("admin") && password.equals("admin")){
+    public boolean validateAcc(String name, String password){
+        if(name.equals("mariaf@gmail.com") && password.equals("mariaihc")){
             return true;
         }
         return false;
